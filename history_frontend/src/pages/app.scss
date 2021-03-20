@@ -1,0 +1,28 @@
+// .guideBody {
+//   background: linear-gradient(90deg, #fafbfd 50%, #fff 50%);
+
+//   &.appTheme-dark, &.appTheme-amsterdam_dark {
+//     background: linear-gradient(90deg, #1a1b20 50%, #1D1E24 50%);
+//   }
+// }
+:root {
+  --accent: #d80f1f;
+  --danger: #f5a700;
+}
+.cdx-block {
+  padding: 0.4em;
+}
+p {
+  margin-bottom: 1rem;
+  line-height: 24px;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+html {
+  background-color: #eff0f4 !important;
+}

@@ -1,0 +1,17 @@
+@import '../../node_modules/@elastic/eui/src/global_styling/functions/index.scss';
+
+// Core
+//$euiColorPrimary: #e94e0f;
+//$euiColorSecondary: #e94e0f;
+$euiColorPrimary: #d80f1f;
+//$euiColorSecondary: #d80f1f;
+//$euiColorAccent: #F990C0;
+//$euiColorHighlight: #dfdfdf;
+
+
+$euiSize: 14px;
+// Global styling
+@import '../../node_modules/@elastic/eui/src/global_styling/index.scss';
+// Components
+@import '../../node_modules/@elastic/eui/src/components/index.scss'
+
