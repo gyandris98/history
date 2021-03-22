@@ -25,6 +25,7 @@ import ArticleEditor, {
 import Editor from '../../../components/layouts/AdminLayout';
 import AdminLayout from '../../../components/layouts/AdminLayout';
 import { contextAuth } from '../../../lib/auth';
+import CustomButton from '../../../components/custom/CustomButton';
 //import EditorJs from 'react-editor-js';
 
 const Container = styled.div`
@@ -147,7 +148,11 @@ const newArticle: FunctionComponent<newArticleProps> = () => {
       <EuiSpacer />
       <AdminLayout
         path="new"
-        rightColumn={<FancyButton form="article-form">Publikálás</FancyButton>}>
+        rightColumn={
+          <CustomButton color="primary" form="article-form" icon="save">
+            Publikálás
+          </CustomButton>
+        }>
         <ArticleEditor
           formId="article-form"
           handleArticleSubmit={onArticleSubmit}

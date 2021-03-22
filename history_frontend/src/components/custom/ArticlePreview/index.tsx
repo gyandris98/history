@@ -4,6 +4,10 @@ import React, { FunctionComponent } from 'react';
 import { IArticlePreview } from './../../../api/article';
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  margin-bottom: 20px;
+`;
+
 const Clickable = styled.div`
   cursor: pointer;
   &:hover {
@@ -45,6 +49,10 @@ const SideBySideTitle = styled.div`
   overflow: none;
 `;
 
+const Lead = styled.p`
+  font-size: 16px;
+`;
+
 interface ArticlePreviewProps {
   article: IArticlePreview;
   noCover?: boolean;
@@ -72,7 +80,7 @@ const ArticlePreview: FunctionComponent<ArticlePreviewProps> = ({
   const date = dayjs(article.createdAt);
   const Title = getElement(titleSize);
   return (
-    <div>
+    <Wrapper>
       <Link
         href={`cikk/${date.year()}/${date.month() + 1}/${date.day()}/${
           article.slug
@@ -99,8 +107,8 @@ const ArticlePreview: FunctionComponent<ArticlePreviewProps> = ({
           </Clickable>
         </div>
       </Link>
-      {!noLead && <p>{article.lead}</p>}
-    </div>
+      {!noLead && <Lead>{article.lead}</Lead>}
+    </Wrapper>
   );
 };
 

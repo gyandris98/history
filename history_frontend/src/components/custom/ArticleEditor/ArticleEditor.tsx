@@ -165,7 +165,7 @@ const ArticleEditor: FunctionComponent<ArticleEditorProps> = ({
       ...formData,
       body: data,
       cover,
-      schedule: scheduled.toISOString(),
+      schedule: scheduled?.toISOString(),
     });
   };
 

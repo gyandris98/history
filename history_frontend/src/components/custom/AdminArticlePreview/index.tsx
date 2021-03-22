@@ -68,6 +68,7 @@ const Container = styled.div<{ loading?: boolean }>`
 const Left = styled.div`
   display: flex;
   flex-direction: column;
+  width: 80%;
 `;
 
 const Title = styled.div`
@@ -82,6 +83,11 @@ const Right = styled.div`
   margin-left: auto;
   text-align: right;
   opacity: 0.8;
+`;
+
+const Lead = styled.div`
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const DateContainer = styled.div`
@@ -112,7 +118,7 @@ const AdminArticlePreview: FunctionComponent<AdminArticlePreviewProps> = ({
       <Container>
         <Left>
           <Title>{article.title}</Title>
-          <div>{article.lead}</div>
+          <Lead>{article.lead}</Lead>
         </Left>
 
         <Right>

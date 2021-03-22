@@ -32,7 +32,7 @@ export const EDITOR_JS_TOOLS = {
     config: {
       endpoints: {
         byFile: EDITOR_ENDPOINT,
-        byUrl: 'http://localhost:5000/api/cikk/uploadurl',
+        byUrl: EDITOR_ENDPOINT + 'url',
       },
       additionalRequestHeaders: {},
     },

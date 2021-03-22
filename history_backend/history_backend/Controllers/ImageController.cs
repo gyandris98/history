@@ -47,6 +47,19 @@ namespace history_backend.API.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [HttpPost("editorurl")]
+        [Authorize(Roles = Role.AdminOrEditor)]
+        public async Task<ActionResult<EditorImageUpload>> UploadEditorImage([FromBody] FileUploadByUrl file)
+        {
+            try
+            {
+                return await service.UploadEditorImageByUrl(webHostEnvironment, file);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
         [HttpDelete("{id}")]
         [Authorize(Roles = Role.AdminOrEditor)]
         public async Task<ActionResult> Delete(string id)

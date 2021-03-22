@@ -13,7 +13,7 @@ interface HomePageProps {
 
 const Page = styled.div`
   width: 100%;
-  max-width: 1000px;
+  max-width: 1030px;
   margin: auto;
   display: flex;
   flex-direction: row;
