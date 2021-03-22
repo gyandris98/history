@@ -16,5 +16,10 @@ namespace history_backend.Domain.Entities
         public string Role { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        public List<RefreshToken> RefreshTokens { get; set; }
+        public User()
+        {
+            RefreshTokens = new List<RefreshToken>();
+        }
     }
 }

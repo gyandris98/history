@@ -7,18 +7,31 @@ export interface User {
   email: string;
   token: string;
   role: string;
+  exp: number;
 }
 
 export interface IAuthResponse {
   accessToken: string;
-  refreshToken: string;
+  refreshToken: {
+    token: string;
+    expires: string;
+    isExpired: boolean;
+  };
 }
 
 const ENDPOINT = '/auth/';
 
 export async function login(email: string, password: string) {
+  const res = await axios.post<string>(config.apiLink + ENDPOINT + 'login', {
+    email,
+    password,
+  });
+  return res.data;
+}
+
+export async function loginRefresh(email: string, password: string) {
   const res = await axios.post<IAuthResponse>(
-    config.apiLink + ENDPOINT + 'login',
+    config.apiLink + ENDPOINT + 'refreshlogin',
     {
       email,
       password,
@@ -36,9 +49,19 @@ export async function register(name: string, email: string, password: string) {
   return res.data;
 }
 
+export async function refresh(token, id) {
+  const res = await axios.post<IAuthResponse>(
+    config.apiLink + ENDPOINT + 'refresh/' + id,
+    token
+  );
+  return res.data;
+}
+
 const exported = {
   login,
   register,
+  loginRefresh,
+  refresh,
 };
 
 export default exported;

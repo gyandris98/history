@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using history_backend.Domain.Services;
 using history_backend.Domain.DTO;
+using System.Security.Claims;
 
 namespace history_backend.API.Controllers
 {
@@ -46,6 +47,31 @@ namespace history_backend.API.Controllers
             catch (Exception)
             {
                 return BadRequest("Incorrect username or password");
+            }
+        }
+        [HttpPost("refreshlogin")]
+        public async Task<ActionResult<string>> RefreshLogin([FromBody] Login loginData)
+        {
+            try
+            {
+                var response = await authService.Login(loginData);
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Incorrect username or password");
+            }
+        }
+        [HttpPost("refresh/{id}")]
+        public async Task<ActionResult<AuthenticateResponse>> Refresh([FromBody] RefreshToken token, string id)
+        {
+            try
+            {
+                return Ok(await authService.Refresh(token, id));
+            }
+            catch (Exception)
+            {
+                return Unauthorized();
             }
         }
     }

@@ -31,6 +31,37 @@ namespace history_backend.Domain.Services
             return GenerateJwtToken(user);
         }
 
+        public async Task<AuthenticateResponse> Login(Login loginData)
+        {
+            var user = await userRepository.FindByEmail(loginData.Email);
+            if (user == null) throw new Exception("User not found");
+            if (!VerifyPassword(loginData.Password, user.PasswordHash, user.PasswordSalt)) throw new Exception("Incorrect password");
+            return new AuthenticateResponse
+            {
+                AccessToken = GenerateJwtToken(user),
+                RefreshToken = GenerateRefreshToken(user)
+            };
+        }
+
+        public async Task<AuthenticateResponse> Refresh(RefreshToken refreshToken, string id)
+        {
+            var user = await userRepository.FindById(id);
+            if (user == null) throw new Exception("User not found");
+            if (!user.RefreshTokens.Any(token => token.Token == refreshToken.Token)) throw new Exception("Refresh token not found");
+            if (refreshToken.IsExpired) throw new Exception("Refresh token is expired");
+
+            user.RefreshTokens.RemoveAll(item => item.Token == refreshToken.Token);
+            var newRefreshToken = GenerateRefreshToken(user);
+            await userRepository.Replace(user);
+
+            var newAccessToken = GenerateJwtToken(user);
+            return new AuthenticateResponse
+            {
+                AccessToken = newAccessToken,
+                RefreshToken = newRefreshToken
+            };
+        }
+
         private bool VerifyPassword(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
@@ -51,12 +82,35 @@ namespace history_backend.Domain.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()), new Claim(ClaimTypes.Name, user.Name), new Claim(ClaimTypes.Email, user.Email), new Claim(ClaimTypes.Role, user.Role) }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddMinutes(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
 
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public RefreshToken GenerateRefreshToken(User user)
+        {
+            var refreshToken = new RefreshToken
+            {
+                Token = GenerateRefreshToken(),
+                Expires = DateTime.UtcNow.AddDays(7)
+            };
+            user.RefreshTokens.Add(refreshToken);
+            userRepository.Replace(user);
+
+            return refreshToken;
+        }
+
+        private string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                return Convert.ToBase64String(randomNumber);
+            }
         }
 
     }

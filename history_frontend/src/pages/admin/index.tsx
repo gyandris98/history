@@ -1,8 +1,13 @@
 import { networkInterfaces } from 'os';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import FancyButton from '../../components/custom/FancyButton';
 import NextEuiButton from '../../components/next_eui/button';
-import { authOnlyProps, contextAuth, useAuth } from '../../lib/auth';
+import {
+  authOnlyProps,
+  contextAuth,
+  handleUserResponseRefresh,
+  useAuth,
+} from '../../lib/auth';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import AdminNav from '../../components/custom/Admin/AdminNav';
@@ -49,6 +54,7 @@ const Admin: FunctionComponent<indexProps> = ({ articles = [] }) => {
   const { status, data, error, isFetching } = useQuery('previews', async () => {
     return await articleAPI.fetchAdminArticlePreviews('');
   });
+  console.log(error);
 
   const { user } = useAuth();
   const router = useRouter();
@@ -118,13 +124,13 @@ const Admin: FunctionComponent<indexProps> = ({ articles = [] }) => {
 //   };
 // };
 
-export const getServerSideProps = context => {
-  const notLoggedIn = contextAuth(context);
-  if (!notLoggedIn.token) return notLoggedIn;
+// export const getServerSideProps = context => {
+//   const notLoggedIn = contextAuth(context);
+//   if (!notLoggedIn.token) return notLoggedIn;
 
-  return {
-    props: {},
-  };
-};
+//   return {
+//     props: {},
+//   };
+// };
 
 export default Admin;

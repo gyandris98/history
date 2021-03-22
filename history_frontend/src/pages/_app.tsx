@@ -22,7 +22,7 @@ const Page = styled.div`
   background-color: #eff0f4;
 `;
 
-loadUser();
+//loadUser();
 
 /**
  * Next.js uses the App component to initialize pages. You can override it
