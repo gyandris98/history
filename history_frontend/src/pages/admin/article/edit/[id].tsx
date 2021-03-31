@@ -26,6 +26,11 @@ const ArticleEdit: FunctionComponent<ArticleEditProps> = ({ id }) => {
     },
     { refetchOnWindowFocus: false }
   );
+  useEffect(() => {
+    if (error) {
+      router.push('/login');
+    }
+  }, [error]);
   //console.log(article);
   const onSubmit = async (output: IArticleOutput) => {
     try {

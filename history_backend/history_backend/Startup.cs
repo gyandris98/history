@@ -52,9 +52,14 @@ namespace history_backend
                                   builder =>
                                   {
                                       builder
-                                      //.WithOrigins("http://localhost:3000/")
-                                      .AllowAnyOrigin()
-                                      .AllowAnyMethod().AllowAnyHeader();
+                                      //.WithOrigins("https://localhost:3000/")
+                                      //.AllowAnyOrigin()
+                                      .SetIsOriginAllowed(origin => true)
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader()
+                                      .AllowCredentials()
+                                      .WithExposedHeaders("set-cookie") ;
+                                      
                                   });
             });
 
@@ -79,7 +84,9 @@ namespace history_backend
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(key),
                         ValidateIssuer = false,
-                        ValidateAudience = false
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
                     };
                     /*options.Events = new JwtBearerEvents
                     {

@@ -58,10 +58,15 @@ async function registerFn(data) {
   return user;
 }
 
-async function logoutFn() {
+export async function logoutFn() {
   delete axios.defaults.headers.common['Authorization'];
   JSCookies.set('access_token');
-  await storage.clearToken();
+  try {
+    const token = storage.getToken();
+    const user = jwt_decode<User>(token);
+    await userAPI.logout(user.nameid);
+  } catch (error) {}
+  storage.clearToken();
 }
 
 const authConfig = {

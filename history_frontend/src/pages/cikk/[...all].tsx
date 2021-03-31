@@ -234,7 +234,7 @@ const Article: FunctionComponent<ArticleProps> = ({ article, latest }) => {
             <LatestIcon icon={faBell} /> Legfrissebb
           </Latest>
           {latest.map(item => (
-            <ArticlePreview article={item} noLead titlePosition="side" />
+            <ArticlePreview article={item} noLead />
           ))}
         </RightColumn>
       </Body>

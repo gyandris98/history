@@ -44,6 +44,12 @@ const Users: FunctionComponent<UsersProps> = () => {
     return data;
   });
 
+  useEffect(() => {
+    if (query.error) {
+      router.push('/login');
+    }
+  }, [query.error]);
+
   const closeDeleteModal = () => {
     setDeleteOpen(false);
   };

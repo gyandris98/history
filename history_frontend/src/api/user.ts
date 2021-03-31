@@ -22,6 +22,9 @@ export async function login(email: string, password: string) {
     {
       email,
       password,
+    },
+    {
+      withCredentials: true,
     }
   );
   return res.data;
@@ -36,9 +39,25 @@ export async function register(name: string, email: string, password: string) {
   return res.data;
 }
 
+export async function refresh(id: string) {
+  const res = await axios.get(config.apiLink + ENDPOINT + `refresh/${id}`, {
+    withCredentials: true,
+  });
+  return res.data;
+}
+
+export async function logout(id: string) {
+  const res = await axios.get(config.apiLink + ENDPOINT + `logout/${id}`, {
+    withCredentials: true,
+  });
+  return res.data;
+}
+
 const exported = {
   login,
   register,
+  refresh,
+  logout,
 };
 
 export default exported;

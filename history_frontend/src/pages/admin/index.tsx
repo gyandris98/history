@@ -1,5 +1,5 @@
 import { networkInterfaces } from 'os';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import FancyButton from '../../components/custom/FancyButton';
 import NextEuiButton from '../../components/next_eui/button';
 import { authOnlyProps, contextAuth, useAuth } from '../../lib/auth';
@@ -52,7 +52,13 @@ const Admin: FunctionComponent<indexProps> = ({ articles = [] }) => {
 
   const { user } = useAuth();
   const router = useRouter();
-  console.log(articles);
+
+  useEffect(() => {
+    if (error) {
+      router.push('/login');
+    }
+  }, [error]);
+
   const handleNewArticle = () => {
     router.push('/admin/article/new');
   };
@@ -82,7 +88,7 @@ const Admin: FunctionComponent<indexProps> = ({ articles = [] }) => {
           </ArticlePreviewContainer>
         ) : (
           <ArticlePreviewContainer>
-            {data.map(article => (
+            {data?.map(article => (
               <AdminArticlePreview
                 article={article}
                 href={`/admin/article/edit/${article.id}`}

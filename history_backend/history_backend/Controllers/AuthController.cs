@@ -35,7 +35,7 @@ namespace history_backend.API.Controllers
                 return BadRequest(e.Message);
             }
         }
-        [HttpPost("login")]
+        /*[HttpPost("login")]
         public async Task<ActionResult<string>> Login([FromBody] Login loginData)
         {
             try
@@ -46,6 +46,70 @@ namespace history_backend.API.Controllers
             catch (Exception)
             {
                 return BadRequest("Incorrect username or password");
+            }
+        }*/
+        [HttpPost("login")]
+        public async Task<ActionResult<string>> Login([FromBody] Login loginData)
+        {
+            try
+            {
+                var response = await authService.AuthenticateRefreshToken(loginData);
+                HttpContext.Response.Cookies.Append("refresh_token", response.RefreshToken.Token, new Microsoft.AspNetCore.Http.CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = response.RefreshToken.Expires,
+                    IsEssential = true,
+                    MaxAge = response.RefreshToken.Expires - DateTime.Now,
+                    SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None,
+                    Secure = true
+                });
+                return Ok(response.AccessToken);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Incorrect username or password");
+            }
+        }
+        [HttpGet("refresh/{id}")]
+        public async Task<ActionResult<String>> Refresh(string id)
+        {
+            try
+            {
+                var refreshToken = HttpContext.Request.Cookies.Where(item => item.Key == "refresh_token").FirstOrDefault();
+                Console.WriteLine(refreshToken);
+                if (refreshToken.Equals(default(KeyValuePair<string, string>))) throw new Exception("Token not found");
+                Console.WriteLine(id);
+                var response = await authService.Refresh(id, refreshToken.Value);
+                HttpContext.Response.Cookies.Append("refresh_token", response.RefreshToken.Token, new Microsoft.AspNetCore.Http.CookieOptions {
+                    HttpOnly = true,
+                    Expires = response.RefreshToken.Expires,
+                    MaxAge = response.RefreshToken.Expires - DateTime.Now, 
+                    IsEssential = true,
+                    SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None,
+                    Secure = true
+                });
+                return Ok(response.AccessToken);
+            }
+            catch (Exception)
+            {
+                return Unauthorized("Token expired");
+            }
+        }
+
+        [HttpGet("logout/{id}")]
+        public async Task<ActionResult> Logout(string id)
+        {
+            try
+            {
+                var refreshToken = HttpContext.Request.Cookies.Where(item => item.Key == "refresh_token").FirstOrDefault();
+                if (refreshToken.Equals(default(KeyValuePair<string, string>))) throw new Exception("Token not found");
+                await authService.Logout(id, refreshToken.Value);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return Ok();
+                //return BadRequest("Token expired");
             }
         }
     }
