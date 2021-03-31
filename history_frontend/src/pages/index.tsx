@@ -17,6 +17,9 @@ const Page = styled.div`
   margin: auto;
   display: flex;
   flex-direction: row;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const Column = styled.div<{ wide?: boolean }>`
@@ -24,11 +27,28 @@ const Column = styled.div<{ wide?: boolean }>`
   flex-direction: column;
   padding: 0 15px;
   width: ${props => (props.wide ? `67%` : `33%`)};
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+const Desktop = styled.div`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+
+const Mobile = styled.div`
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const Index: FunctionComponent<HomePageProps> = ({ articles }) => {
   return (
-    <Page>
+    <>
+    <Desktop>
+<Page>
       <Column wide>
         <ArticlePreview article={articles[0]} titleSize="large" />
         {articles.slice(3).map(item => (
@@ -40,6 +60,16 @@ const Index: FunctionComponent<HomePageProps> = ({ articles }) => {
         <ArticlePreview article={articles[2]} noLead />
       </Column>
     </Page>
+    </Desktop>
+    <Mobile>
+      <ArticlePreview article={articles[0]} titleSize="large" />
+      <ArticlePreview article={articles[1]} noLead />
+        <ArticlePreview article={articles[2]} noLead />
+        {articles.slice(3).map(item => (
+          <ArticlePreview article={item} key={item.id} noCover />
+        ))}
+    </Mobile>
+    </>
   );
 };
 

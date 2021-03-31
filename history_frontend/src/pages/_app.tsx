@@ -20,6 +20,9 @@ const Page = styled.div`
   width: 100%;
   background-color: #fafbfd;
   background-color: #eff0f4;
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 loadUser();
