@@ -1,12 +1,18 @@
 import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlus,
+  faSave,
+  faSearch,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 import { EuiLoadingSpinner } from '@elastic/eui';
 
-interface CustomButtonProps {
+interface CustomButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color: 'primary' | 'danger';
-  icon?: 'delete' | 'save' | 'new';
+  icon?: 'delete' | 'save' | 'new' | 'search';
   width?: 'normal' | 'wide';
   loading?: boolean;
 }
@@ -15,6 +21,7 @@ const icons = {
   delete: faTrash,
   save: faSave,
   new: faPlus,
+  search: faSearch,
 };
 
 const widthData = {
@@ -45,7 +52,7 @@ const Button = styled.button<{ padding: number }>`
   }};
 `;
 
-const Icon = styled(FontAwesomeIcon)`
+const Icon = styled(FontAwesomeIcon)<{ hover?: boolean }>`
   position: absolute;
   top: -10px;
   left: 50%;
@@ -57,7 +64,7 @@ const Icon = styled(FontAwesomeIcon)`
   ${props => props.hover && `top: 50%; opacity: 1;`}
 `;
 
-const Text = styled.span`
+const Text = styled.span<{ hover?: boolean }>`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -67,9 +74,7 @@ const Text = styled.span`
   ${props => props.hover && `top: 30px; opacity: 0;`}
 `;
 
-const CustomButton: FunctionComponent<
-  CustomButtonProps & React.HTMLProps<HTMLButtonElement>
-> = props => {
+const CustomButton: FunctionComponent<CustomButtonProps> = props => {
   const [hover, setHover] = useState(false);
   const width = widthData[props.width || 'normal'];
   return props.loading ? (

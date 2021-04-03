@@ -40,6 +40,12 @@ namespace history_backend.API.Controllers
         {
             return Ok(await service.GetArticlePreviews());
         }
+        [HttpPost("{pageNumber}/{pageSize}")]
+        [Authorize(Roles = Role.AdminOrEditor)]
+        public async Task<ActionResult<ArticlePreviewPaginationResponse>> ListPaginated(int pageNumber, int pageSize, [FromBody] SearchQuery query)
+        {
+            return Ok(await service.ArticlePreviewSearch(pageNumber, pageSize, query));
+        }
         [HttpGet("{id}")]
         [Authorize]
         public async Task<ActionResult<ClientArticle>> GetById(string id)

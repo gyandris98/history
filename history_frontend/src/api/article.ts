@@ -29,6 +29,12 @@ export interface IArticlePreview {
   slug: string;
 }
 
+export interface IArticlePreviewPagination {
+  articles: IArticlePreview[];
+  totalCount: number;
+  pageNumber: number;
+}
+
 const ENDPOINT = '/article/';
 
 export async function createArticle(article) {
@@ -36,10 +42,32 @@ export async function createArticle(article) {
   return res.data;
 }
 
-export async function fetchAdminArticlePreviews(token: string) {
-  console.log(axios.defaults.headers);
+export interface ISearchOutput {
+  query: string;
+  from?: string;
+  to?: string;
+}
+
+export async function fetchAdminArticlePreviews(
+  pageNumber: number,
+  pageSize: number
+) {
   await new Promise((resolve, reject) => setTimeout(() => resolve(''), 1000));
-  const res = await axios.get<IArticlePreview[]>(config.apiLink + ENDPOINT);
+  const res = await axios.get<IArticlePreviewPagination>(
+    `${config.apiLink}${ENDPOINT}${pageNumber}/${pageSize}`
+  );
+  return res.data;
+}
+
+export async function fetchAdminArticlePreviewsSearch(
+  pageNumber: number,
+  pageSize: number,
+  query: ISearchOutput
+) {
+  const res = await axios.post<IArticlePreviewPagination>(
+    `${config.apiLink}${ENDPOINT}${pageNumber}/${pageSize}`,
+    query
+  );
   return res.data;
 }
 
@@ -57,6 +85,7 @@ export async function update(id: string, data) {
 const exported = {
   createArticle,
   fetchAdminArticlePreviews,
+  fetchAdminArticlePreviewsSearch,
   fetchById,
   update,
 };

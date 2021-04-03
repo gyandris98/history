@@ -45,7 +45,6 @@ async function fetchUsers({
   pageSize: number;
 }) {
   await new Promise((resolve, reject) => setTimeout(() => resolve(''), 1000));
-  console.log(axios.defaults.headers);
   const res = await axios.get<IUserPagination>(
     config.apiLink + ENDPOINT + `${pageNumber}/${pageSize}`
   );

@@ -83,6 +83,30 @@ namespace history_backend.Domain.Services
             return result;
         }
 
+        public async Task<ArticlePreviewPaginationResponse> GetArticlePreviewsPagination(int pageNumber, int pageSize)
+        {
+            var articles = await articleRepository.List(pageSize, pageNumber);
+            var previews = articles.Select(article => ConvertArticleToPreview(article)).ToList();
+            return new ArticlePreviewPaginationResponse
+            {
+                TotalCount = await articleRepository.GetCount(),
+                PageNumber = pageNumber,
+                Articles = previews
+            };
+        }
+
+        public async Task<ArticlePreviewPaginationResponse> ArticlePreviewSearch(int pageNumber, int pageSize, SearchQuery query)
+        {
+            (var count, var articles) = await articleRepository.Search(pageNumber, pageSize, query.Query, query.From, query.To);
+            var previews = articles.Select(article => ConvertArticleToPreview(article)).ToList();
+            return new ArticlePreviewPaginationResponse
+            {
+                TotalCount = count,
+                PageNumber = pageNumber,
+                Articles = previews
+            };
+        }
+
         public async Task<ClientArticle> GetById(string id)
         {
             var article = await articleRepository.GetById(id);

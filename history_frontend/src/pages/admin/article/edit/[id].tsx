@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { contextAuth } from '../../../../lib/auth';
 import articleAPI, { IArticle } from '../../../../api/article';
 import Editor from '../../../../components/layouts/AdminLayout';
