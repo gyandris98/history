@@ -52,7 +52,6 @@ export async function fetchAdminArticlePreviews(
   pageNumber: number,
   pageSize: number
 ) {
-  await new Promise((resolve, reject) => setTimeout(() => resolve(''), 1000));
   const res = await axios.get<IArticlePreviewPagination>(
     `${config.apiLink}${ENDPOINT}${pageNumber}/${pageSize}`
   );

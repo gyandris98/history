@@ -1,14 +1,20 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { EuiBasicTable, EuiConfirmModal, EuiOverlayMask } from '@elastic/eui';
-import { contextAuth, useAuth } from '../../lib/auth';
-import usersAPI, { IUserPagination } from '../../api/users';
-import AdminLayout from '../../components/layouts/AdminLayout';
-import { IUser, roleOptions } from './../../api/users';
-import CustomButton from '../../components/custom/CustomButton';
-import styled from 'styled-components';
-import { EuiSelect } from '@elastic/eui';
+import {
+  EuiSelect,
+  EuiOverlayMask,
+  EuiConfirmModal,
+  EuiBasicTable,
+} from '@elastic/eui';
 import { useRouter } from 'next/router';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import usersAPI, { IUser, roleOptions } from '../../../api/users';
+import { useAuth } from '../../../lib/auth';
+import AdminLayout from '../../layouts/AdminLayout';
+import styled from 'styled-components';
+import CustomButton from '../CustomButton';
+import Spinner from '../Spinner';
+
+interface AdminUsersProps {}
 
 const Wrapper = styled.div`
   margin: 20px;
@@ -20,12 +26,7 @@ const DeleteButton = styled(CustomButton)`
   margin-top: 20px;
 `;
 
-interface UsersProps {
-  data: IUserPagination;
-  token: string;
-}
-
-const Users: FunctionComponent<UsersProps> = () => {
+const AdminUsers: FunctionComponent<AdminUsersProps> = () => {
   const { user } = useAuth();
   if (!user) return null;
   const router = useRouter();
@@ -35,7 +36,6 @@ const Users: FunctionComponent<UsersProps> = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const query = useQuery(['users', { pageNumber, pageSize }], async params => {
-    console.log(params);
     const data = await usersAPI.fetchUsers({ pageNumber, pageSize, token: '' });
     setItems(data.users);
     setPageNumber(data.pageNumber);
@@ -164,18 +164,22 @@ const Users: FunctionComponent<UsersProps> = () => {
         </EuiOverlayMask>
       )}
       <Wrapper>
-        <EuiBasicTable
-          items={items}
-          rowHeader="Név"
-          columns={columns}
-          rowProps={getRowProps}
-          cellProps={getCellProps}
-          pagination={pagination}
-          onChange={onTableChange}
-          selection={selection}
-          isSelectable={true}
-          itemId="id"
-        />
+        {items.length === 0 ? (
+          <Spinner />
+        ) : (
+          <EuiBasicTable
+            items={items}
+            rowHeader="Név"
+            columns={columns}
+            rowProps={getRowProps}
+            cellProps={getCellProps}
+            pagination={pagination}
+            onChange={onTableChange}
+            selection={selection}
+            isSelectable={true}
+            itemId="id"
+          />
+        )}
         <style jsx>
           {`
             .customCellClass {
@@ -196,32 +200,4 @@ const Users: FunctionComponent<UsersProps> = () => {
   );
 };
 
-export const getServerSideProps = context => {
-  const notLoggedIn = contextAuth(context);
-  if (!notLoggedIn.token) return notLoggedIn;
-
-  return {
-    props: {},
-  };
-};
-
-// export const getServerSideProps = async context => {
-//   const notLoggedIn = contextAuth(context);
-//   console.log(notLoggedIn);
-//   if (!notLoggedIn.token) return notLoggedIn;
-
-//   const data = await usersAPI.fetchUsers({
-//     token: notLoggedIn.token,
-//     pageNumber: 1,
-//     pageSize: 10,
-//   });
-//   console.log(data);
-//   return {
-//     props: {
-//       data,
-//       token: notLoggedIn.token,
-//     },
-//   };
-// };
-
-export default Users;
+export default AdminUsers;

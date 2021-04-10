@@ -12,13 +12,14 @@ import {
   EuiSpacer,
 } from '@elastic/eui';
 import React, { FormEvent, useEffect, useState } from 'react';
-import { useAuth } from '../lib/auth';
-import { useForm } from 'react-hook-form';
+import { useAuth } from '../../../lib/auth';
+import { FieldError, useForm } from 'react-hook-form';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import FancyButton from '../components/custom/FancyButton';
-import Link from 'next/link';
-import { formatError } from '../lib/validation';
+import FancyButton from '../FancyButton';
+import { formatError } from '../../../lib/validation';
+import { useHistory } from 'react-router-dom';
 
 const Form = styled(EuiForm)`
   width: 100%;
@@ -29,29 +30,26 @@ const FormRow = styled(EuiFormRow)`
   width: 800px;
 `;
 
-const Page = styled.div`
-  padding: 14px;
-  display: flex;
-`;
-
 interface IFormInput {
+  name: string;
   email: string;
   password: string;
 }
 
-const formatValidation = formatError('login');
+const formatValidation = formatError('register');
 
-export default function login() {
-  const { login } = useAuth();
+export default function register() {
+  const { login, register: registerFn } = useAuth();
   const { errors, register, handleSubmit } = useForm<IFormInput>();
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  //const router = useRouter();
+  const history = useHistory();
 
   async function onSubmit(data: IFormInput) {
     try {
       setLoading(true);
-      const res = await login(data);
-      router.push('admin');
+      const res = await registerFn(data);
+      history.push('/');
     } catch (error) {
       console.log(error);
     } finally {
@@ -60,13 +58,30 @@ export default function login() {
   }
 
   return (
-    <Page>
+    <EuiPage>
       <Form component="form" onSubmit={handleSubmit(onSubmit)}>
         <FormRow>
           <EuiText textAlign="center">
-            <h1>Bejelentkezés</h1>
+            <h1>Regisztráció</h1>
           </EuiText>
         </FormRow>
+
+        <FormRow
+          label="Teljes név"
+          isInvalid={!!errors.name}
+          error={formatValidation({ error: errors.name, field: 'name' })}>
+          <EuiFieldText
+            name="name"
+            inputRef={register({
+              minLength: 2,
+              maxLength: 64,
+              required: true,
+            })}
+            isInvalid={!!errors.name}
+            fullWidth
+          />
+        </FormRow>
+
         <FormRow
           label="Email cím"
           isInvalid={!!errors.email}
@@ -102,17 +117,17 @@ export default function login() {
         </FormRow>
 
         {/* <EuiButton color="secondary" type="submit">
-          Bejelentkezés
-        </EuiButton> */}
+            Bejelentkezés
+          </EuiButton> */}
         <EuiSpacer />
         <FancyButton fullWidth type="submit" isLoading={loading}>
-          Bejelentkezés
+          Regisztráció
         </FancyButton>
         <EuiSpacer />
         <EuiText>
-          Nincs még fiókja? <Link href="/register">Regisztráljon</Link>
+          Van már fiókja? <Link href="/login">Lépjen be</Link>
         </EuiText>
       </Form>
-    </Page>
+    </EuiPage>
   );
 }

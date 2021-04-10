@@ -23,6 +23,14 @@ const pathPrefix = usePathPrefix ? derivePathPrefix() : '';
 const themeConfig = buildThemeConfig();
 
 const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/admin/:any*',
+        destination: '/admin',
+      },
+    ];
+  },
   /** Disable the `X-Powered-By: Next.js` response header. */
   poweredByHeader: false,
 

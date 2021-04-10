@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { IArticlePreview } from '../../../api/article';
 import styled from 'styled-components';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div<{ loading?: boolean }>`
   width: 100%;
@@ -95,6 +95,10 @@ const DateContainer = styled.div`
   margin-bottom: 10px;
 `;
 
+const CustomLink = styled(Link)`
+  width: 100%;
+`;
+
 const formatDate = (date: string) => {
   return new Date(date).toLocaleDateString();
 };
@@ -114,7 +118,7 @@ const AdminArticlePreview: FunctionComponent<AdminArticlePreviewProps> = ({
     return <Container loading={true} />;
   }
   return (
-    <Link href={href}>
+    <CustomLink to={href}>
       <Container>
         <Left>
           <Title>{article.title}</Title>
@@ -128,7 +132,7 @@ const AdminArticlePreview: FunctionComponent<AdminArticlePreviewProps> = ({
           <div>{article.user.name}</div>
         </Right>
       </Container>
-    </Link>
+    </CustomLink>
   );
 };
 

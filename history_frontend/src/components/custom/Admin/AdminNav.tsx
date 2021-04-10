@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
+// import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUsers,
@@ -44,13 +45,13 @@ const Icon = styled(FontAwesomeIcon)`
 const navoptions = [
   {
     path: '/',
-    link: '/admin',
+    link: '/',
     name: 'Áttekintés',
     icon: faThList,
   },
   {
     path: 'users',
-    link: '/admin/users',
+    link: '/users',
     name: 'Felhasználók',
     icon: faUsers,
   },
@@ -59,12 +60,12 @@ const navoptions = [
 const customPages = {
   new: {
     name: 'Új cikk',
-    link: '/admin/articles/new',
+    link: '/articles/new',
     icon: faPlusCircle,
   },
   edit: {
     name: 'Szerkesztés',
-    link: '/admin',
+    link: '/',
     icon: faEdit,
   },
 };
@@ -76,15 +77,15 @@ interface AdminNavProps {
 const AdminNav: FunctionComponent<AdminNavProps> = ({ path }) => {
   return (
     <Container>
-      {navoptions.map(item => (
-        <Link href={item.link}>
+      {navoptions.map((item, key) => (
+        <Link to={item.link} key={key}>
           <NavItem active={path === item.path}>
             <Icon icon={item.icon} /> {item.name}
           </NavItem>
         </Link>
       ))}
       {customPages[path] && (
-        <Link href={customPages[path].link}>
+        <Link to={customPages[path].link}>
           <NavItem active>
             <Icon icon={customPages[path].icon} /> {customPages[path].name}
           </NavItem>

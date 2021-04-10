@@ -16,7 +16,6 @@ const Page = styled.div`
   line-height: 1.5;
   max-width: 1000px;
   margin: auto;
-  
 `;
 
 const Column = styled.div`
@@ -34,8 +33,9 @@ const Middle = styled.div`
 const Body = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const Text = styled.div`
