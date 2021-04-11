@@ -14,12 +14,12 @@ const EditArticle: FunctionComponent<EditArticleProps> = () => {
   const { id } = useParams<Record<string, string>>();
   const history = useHistory();
 
-  const { status, data, error, isFetching } = useQuery(
+  const { status, data, error } = useQuery(
     'article-edit',
     async () => {
       return await articleAPI.fetchById(id, '');
     },
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false, refetchOnMount: 'always' }
   );
   useEffect(() => {
     if (error) {

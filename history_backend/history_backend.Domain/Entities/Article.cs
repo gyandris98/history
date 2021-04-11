@@ -22,6 +22,11 @@ namespace history_backend.Domain.Entities
         public string Slug { get; set; }
         [BsonRepresentation(BsonType.DateTime)]
         public DateTime Schedule { get; set; }
+        public List<string> Tags { get; set; }
+        public Article()
+        {
+            Tags = new List<string>();
+        }
     }
     public class ArticleUser
     {

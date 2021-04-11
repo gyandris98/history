@@ -12,6 +12,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../../lib/auth';
 import { EuiDatePicker, EuiFormRow } from '@elastic/eui';
 import moment from 'moment';
+import TagEditor from './TagEditor';
 
 const EditorJs = dynamic(() => import('react-editor-js'), {
   ssr: false,
@@ -22,6 +23,7 @@ interface IArticleInput {
   lead: string;
   author: string;
   schedule: moment.Moment;
+  tags: string[];
 }
 
 export interface IArticleOutput {
@@ -31,6 +33,7 @@ export interface IArticleOutput {
   cover: IImage;
   author: string;
   schedule: string;
+  tags: string[];
 }
 
 const EditorWrapper = styled.div`
@@ -143,6 +146,7 @@ const ArticleEditor: FunctionComponent<ArticleEditorProps> = ({
   const [tools, setTools] = useState({});
   const [cover, setCover] = useState<IImage>(defaultValues?.cover);
   const [coverLoading, setCoverLoading] = useState(false);
+  const [tags, setTags] = useState<string[]>(defaultValues?.tags || []);
 
   const { errors, register, handleSubmit, control } = useForm<IArticleInput>({
     defaultValues: {
@@ -165,6 +169,7 @@ const ArticleEditor: FunctionComponent<ArticleEditorProps> = ({
       ...formData,
       body: data,
       cover,
+      tags,
       schedule: scheduled?.toISOString(),
     });
   };
@@ -196,6 +201,16 @@ const ArticleEditor: FunctionComponent<ArticleEditorProps> = ({
     };
     getTools();
   }, []);
+
+  const onNewTag = (tag: string) => {
+    if (!tags.includes(tag)) {
+      setTags(prev => [...prev, tag]);
+    }
+  };
+
+  const onTagDelete = (tag: string) => {
+    setTags(prev => prev.filter(item => item !== tag));
+  };
 
   return (
     <>
@@ -258,6 +273,14 @@ const ArticleEditor: FunctionComponent<ArticleEditorProps> = ({
         </HorizontalContainer>
 
         <MutedHr />
+
+        <InputWrapper htmlFor="tags">
+          <InputTitle>CÍMKÉK</InputTitle>
+          <TagEditor tags={tags} onDelete={onTagDelete} onNewItem={onNewTag} />
+        </InputWrapper>
+
+        <MutedHr />
+
         <InputWrapper htmlFor="cover">
           <InputTitle>BORÍTÓ</InputTitle>
 

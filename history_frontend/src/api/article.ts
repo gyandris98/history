@@ -17,6 +17,7 @@ export interface IArticle {
   slug: string;
   author: string;
   schedule: string;
+  tags: string[];
 }
 
 export interface IArticlePreview {

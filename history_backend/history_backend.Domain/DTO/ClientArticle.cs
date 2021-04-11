@@ -17,5 +17,10 @@ namespace history_backend.Domain.DTO
         public string Slug { get; set; }
         public string Author { get; set; }
         public DateTime Schedule { get; set; }
+        public List<string> Tags { get; set; }
+        public ClientArticle()
+        {
+            Tags = new List<string>();
+        }
     }
 }

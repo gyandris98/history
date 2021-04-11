@@ -48,7 +48,8 @@ namespace history_backend.Domain.Services
                 CreatedAt = DateTime.Now,
                 Schedule = scheduleTime,
                 Author = change.Author,
-                Slug = new SlugHelper().GenerateSlug(change.Title)
+                Slug = new SlugHelper().GenerateSlug(change.Title),
+                Tags = change.Tags
             };
             Console.WriteLine("Creating article");
             await articleRepository.Create(article);
@@ -127,6 +128,7 @@ namespace history_backend.Domain.Services
             article.Body = model.Body;
             article.Cover = model.Cover;
             article.Author = model.Author;
+            article.Tags = model.Tags;
             if (model.Schedule != null)
                 article.Schedule = model.Schedule;
             else
@@ -137,7 +139,8 @@ namespace history_backend.Domain.Services
         private async Task<ClientArticle> ConvertArticle(Article source)
         {
             //var user = await userRepository.FindById(source.UserId);
-           // if (user == null) throw new Exception();
+            // if (user == null) throw new Exception();
+            Console.WriteLine(source.Tags.Count);
             return new ClientArticle
             {
                 Id = source.ID.ToString(),
@@ -155,7 +158,8 @@ namespace history_backend.Domain.Services
                 CreatedAt = source.CreatedAt,
                 Slug = source.Slug,
                 Author = source.Author,
-                Schedule = source.Schedule
+                Schedule = source.Schedule,
+                Tags = source.Tags
             };
         }
         private ArticlePreview ConvertArticleToPreview(Article article)

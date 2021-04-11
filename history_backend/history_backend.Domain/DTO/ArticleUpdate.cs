@@ -14,5 +14,10 @@ namespace history_backend.Domain.DTO
         public Image Cover { get; set; }
         public string Author { get; set; }
         public DateTime Schedule { get; set; }
+        public List<string> Tags { get; set; }
+        public ArticleUpdate()
+        {
+            Tags = new List<string>();
+        }
     }
 }

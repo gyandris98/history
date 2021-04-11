@@ -147,6 +147,24 @@ const LatestIcon = styled(FontAwesomeIcon)`
   color: var(--accent);
 `;
 
+const TagContainer = styled.ul`
+  margin-top: 10px;
+`;
+
+const Tag = styled.li`
+  display: inline-block;
+  color: #333;
+  background-color: #dddddd;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 3px;
+  padding: 5px 8px;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background: #ffbdbd;
+  }
+`;
+
 interface ArticleProps {
   article: IArticle;
   latest: IArticlePreview[];
@@ -233,6 +251,11 @@ const Article: FunctionComponent<ArticleProps> = ({ article, latest }) => {
               {dayjs(article.createdAt).format('YYYY.MM.DD.')}
             </AuthorDate>
           </AuthorContainer>
+          <TagContainer>
+            {article.tags?.map((item, key) => (
+              <Tag key={key}>{item}</Tag>
+            ))}
+          </TagContainer>
           <Lead>{article.lead}</Lead>
           {article.body.blocks.map((block, i) => renderBlock(block, i))}
         </Text>
