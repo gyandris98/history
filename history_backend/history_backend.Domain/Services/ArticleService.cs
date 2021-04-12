@@ -108,6 +108,19 @@ namespace history_backend.Domain.Services
             };
         }
 
+        public async Task<ArticlePreviewPaginationResponse> TagSearch(int pageNumber, int pageSize, string tag)
+        {
+            (var count, var articles) = await articleRepository.SearchByTag(pageNumber, pageSize, tag);
+            var previews = articles.Select(article => ConvertArticleToPreview(article)).ToList();
+            Console.WriteLine(count);
+            return new ArticlePreviewPaginationResponse
+            {
+                TotalCount = count,
+                PageNumber = pageNumber,
+                Articles = previews
+            };
+        }
+
         public async Task<ClientArticle> GetById(string id)
         {
             var article = await articleRepository.GetById(id);
@@ -135,6 +148,7 @@ namespace history_backend.Domain.Services
                 article.Schedule = article.CreatedAt;
             await articleRepository.Replace(article);
         }
+
 
         private async Task<ClientArticle> ConvertArticle(Article source)
         {

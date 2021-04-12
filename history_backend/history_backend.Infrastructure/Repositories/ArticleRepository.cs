@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using history_backend.Domain;
+using history_backend.Domain.DTO;
 using history_backend.Domain.Entities;
 using history_backend.Domain.Repositories;
 using MongoDB.Bson;
@@ -102,5 +103,25 @@ namespace history_backend.Infrastructure.Repositories
             return (count, articles);
             
         }
+
+        public async Task<(long, List<Article>)> SearchByTag(int pageNumber, int pageSize, string tag)
+        {
+            var tagQuery = new BsonDocument();
+            tagQuery.Add("Tags", tag);
+            /*if (partial == true)
+            {
+                tagQuery.Add("Tags", new BsonDocument
+                {
+                    {"$in", new BsonRegularExpression(tag, "i") }
+                });
+            } else
+            {
+            }*/
+
+            var count = await db.Articles.CountDocumentsAsync(tagQuery);
+            var articles = await db.Articles.Find(tagQuery).SortByDescending(a => a.CreatedAt).Skip(pageSize * (pageNumber - 1)).Limit(pageSize).ToListAsync();
+            return (count, articles);
+        }
+
     }
 }

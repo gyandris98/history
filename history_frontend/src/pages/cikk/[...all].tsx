@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import ArticlePreview from '../../components/custom/ArticlePreview';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
 const Page = styled.div`
   display: flex;
@@ -253,7 +254,9 @@ const Article: FunctionComponent<ArticleProps> = ({ article, latest }) => {
           </AuthorContainer>
           <TagContainer>
             {article.tags?.map((item, key) => (
-              <Tag key={key}>{item}</Tag>
+              <Link key={key} href={`tag/${item}`}>
+                <Tag>{item}</Tag>
+              </Link>
             ))}
           </TagContainer>
           <Lead>{article.lead}</Lead>

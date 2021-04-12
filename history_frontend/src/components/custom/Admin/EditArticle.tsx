@@ -15,7 +15,7 @@ const EditArticle: FunctionComponent<EditArticleProps> = () => {
   const history = useHistory();
 
   const { status, data, error } = useQuery(
-    'article-edit',
+    `article-edit/${id}`,
     async () => {
       return await articleAPI.fetchById(id, '');
     },
@@ -29,6 +29,7 @@ const EditArticle: FunctionComponent<EditArticleProps> = () => {
   //console.log(article);
   const onSubmit = async (output: IArticleOutput) => {
     try {
+      console.log(output);
       await articleAPI.update(id, output);
       history.push('/');
     } catch (error) {}

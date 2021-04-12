@@ -43,6 +43,8 @@ namespace history_backend.API.Controllers
         {
             return await articleService.GetById(id);
         }
+
+
         [HttpGet("{year}/{month}/{day}/{slug}")]
         public async Task<ActionResult<ClientArticle>> GetArticle(string year, string month, string day, string slug)
         {
