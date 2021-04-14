@@ -12,7 +12,7 @@ import { useAuth } from '../../../lib/auth';
 import AdminArticlePreview from '../AdminArticlePreview';
 import CustomButton from '../CustomButton';
 import AdminNav from './AdminNav';
-import Search from '../Search';
+import AdminSearch from '../AdminSearch';
 
 interface AdminIndexProps {}
 
@@ -105,7 +105,7 @@ const AdminIndex: FunctionComponent<AdminIndexProps> = () => {
           <AdminArticlePreview key={index} loading={true} />
         ))}
       </ArticlePreviewContainer> */}
-        <Search onSearch={onSearch} />
+        <AdminSearch onSearch={onSearch} />
         {query.status === 'loading' ? (
           // <Spinner />
           <ArticlePreviewContainer>

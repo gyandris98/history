@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using history_backend.Domain;
 using history_backend.Domain.DTO;
@@ -108,20 +109,30 @@ namespace history_backend.Infrastructure.Repositories
         {
             var tagQuery = new BsonDocument();
             tagQuery.Add("Tags", tag);
-            /*if (partial == true)
-            {
-                tagQuery.Add("Tags", new BsonDocument
-                {
-                    {"$in", new BsonRegularExpression(tag, "i") }
-                });
-            } else
-            {
-            }*/
 
             var count = await db.Articles.CountDocumentsAsync(tagQuery);
             var articles = await db.Articles.Find(tagQuery).SortByDescending(a => a.CreatedAt).Skip(pageSize * (pageNumber - 1)).Limit(pageSize).ToListAsync();
             return (count, articles);
         }
 
+        public async Task<(long, List<string>)> SearchPartialTag(string query)
+        {
+            FieldDefinition<Article, string> field = "Tags";
+            var regex = new Regex(query, RegexOptions.IgnoreCase);
+
+            var allTags = await db.Articles.Distinct(field, _ => true).ToListAsync();
+            var regexedTags = allTags.Where(item => regex.IsMatch(item)).Take(5).ToList();
+            var titleCount = await db.Articles.CountDocumentsAsync(Builders<Article>.Filter.Regex(x => x.Title, new BsonRegularExpression(query, "i")));
+
+            return (titleCount, regexedTags);
+        }
+
+        public async Task<(long, List<Article>)> SearchByTitle(int pageNumber, int pageSize, string title)
+        {
+            var filter = Builders<Article>.Filter.Regex(x => x.Title, new BsonRegularExpression(title, "i"));
+            var count = await db.Articles.CountDocumentsAsync(filter);
+            var articles = await db.Articles.Find(filter).SortByDescending(a => a.CreatedAt).Skip(pageSize * (pageNumber - 1)).Limit(pageSize).ToListAsync();
+            return (count, articles);
+        }
     }
 }

@@ -12,10 +12,12 @@ import {
 } from '@elastic/eui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faSearch,
   faSignOutAlt,
   faUser,
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
+import Search from '../Search/Search';
 
 const Bar = styled.div`
   background-color: var(--accent);
@@ -28,7 +30,6 @@ const Bar = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  
 `;
 
 const Brand = styled(Image)`
@@ -58,7 +59,7 @@ const User = styled.div`
 `;
 
 const PopoverWrapper = styled.div`
-  margin-left: auto;
+  margin-left: 20px;
 `;
 
 const ContextMenuItem = styled(EuiContextMenuItem)`
@@ -72,12 +73,37 @@ const ContextMenuItem = styled(EuiContextMenuItem)`
   }
 `;
 
+const IconContainer = styled.div<{ open?: boolean }>`
+  font-size: 20px;
+  margin-left: auto;
+  padding: 10px;
+  border-radius: 100%;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  ${props =>
+    props.open &&
+    `
+  background: #fff;
+  color: var(--accent);
+  `}
+  &:hover {
+    background: #fff;
+    color: var(--accent);
+    ${props =>
+      props.open &&
+      `
+      opacity: 0.8;
+    `}
+  }
+`;
+
 interface NavbarProps {}
 
 const Navbar: FunctionComponent<NavbarProps> = () => {
   const router = useRouter();
   const { user, logout } = useAuth();
   const [isPopoverOpen, setPopover] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const onButtonClick = () => {
     setPopover(!isPopoverOpen);
   };
@@ -89,6 +115,15 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
     router.push('/');
     logout();
   };
+
+  const searchClick = () => {
+    setSearchOpen(prev => !prev);
+  };
+
+  const closeSearch = () => {
+    setSearchOpen(false);
+  };
+
   const button = user ? (
     <User onClick={onButtonClick}>{user.unique_name}</User>
   ) : null;
@@ -114,32 +149,40 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
     </ContextMenuItem>,
   ];
   return (
-    <Bar>
-      <Brand
-        src="/images/logo-inverted.png"
-        width="180px"
-        height="34px"
-        onClick={() => router.push('/')}
-      />{' '}
-      {user && (
-        <Link href="/admin">
-          <AdminLink>Admin</AdminLink>
-        </Link>
-      )}
-      {user && (
-        <PopoverWrapper>
-          <EuiPopover
-            id="singlePanel"
-            button={button}
-            isOpen={isPopoverOpen}
-            closePopover={closePopover}
-            panelPaddingSize="none"
-            anchorPosition="downLeft">
-            <EuiContextMenuPanel items={items} hasFocus={false} />
-          </EuiPopover>
-        </PopoverWrapper>
-      )}
-    </Bar>
+    <>
+      <Bar>
+        <Link href="/">
+          <Brand
+            src="/images/logo-inverted.png"
+            width="180px"
+            height="34px"
+            //onClick={() => router.push('/')}
+          />
+        </Link>{' '}
+        {user && (
+          <Link href="/admin">
+            <AdminLink>Admin</AdminLink>
+          </Link>
+        )}
+        <IconContainer onClick={searchClick} open={searchOpen}>
+          <FontAwesomeIcon icon={faSearch} />
+        </IconContainer>
+        {user && (
+          <PopoverWrapper>
+            <EuiPopover
+              id="singlePanel"
+              button={button}
+              isOpen={isPopoverOpen}
+              closePopover={closePopover}
+              panelPaddingSize="none"
+              anchorPosition="downLeft">
+              <EuiContextMenuPanel items={items} hasFocus={false} />
+            </EuiPopover>
+          </PopoverWrapper>
+        )}
+      </Bar>
+      {searchOpen && <Search close={closeSearch} />}
+    </>
   );
 };
 

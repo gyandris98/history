@@ -50,6 +50,12 @@ const SideBySideTitle = styled.div`
 `;
 
 const Lead = styled.p`
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
   font-size: 16px;
 `;
 

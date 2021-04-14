@@ -48,7 +48,7 @@ interface IFormInput {
   to?: moment.Moment;
 }
 
-const Search: FunctionComponent<SearchProps> = ({ onSearch }) => {
+const AdminSearch: FunctionComponent<SearchProps> = ({ onSearch }) => {
   const { errors, register, handleSubmit, control } = useForm<IFormInput>({
     defaultValues: {
       query: '',
@@ -124,4 +124,4 @@ const Search: FunctionComponent<SearchProps> = ({ onSearch }) => {
   );
 };
 
-export default Search;
+export default AdminSearch;

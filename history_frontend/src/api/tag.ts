@@ -15,8 +15,23 @@ export async function fetchByTag(
   return res.data;
 }
 
+interface IPartialTagSearch {
+  titleCount: number;
+  tags: string[];
+}
+
+export async function searchByTagOrTitle(query: string) {
+  if (query.length > 0) {
+    const res = await axios.get<IPartialTagSearch>(
+      config.apiLink + ENDPOINT + query
+    );
+    return res.data;
+  }
+}
+
 const exported = {
   fetchByTag,
+  searchByTagOrTitle,
 };
 
 export default exported;

@@ -6,7 +6,7 @@ namespace history_backend.Domain.DTO
 {
     public class TagResponse
     {
-        public string Name { get; set; }
-        public long Count { get; set; }
+        public List<string> Tags { get; set; }
+        public long TitleCount { get; set; }
     }
 }

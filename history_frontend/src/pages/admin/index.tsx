@@ -15,7 +15,7 @@ import AdminArticlePreview from '../../components/custom/AdminArticlePreview';
 import { useQuery } from 'react-query';
 import Spinner from './../../components/custom/Spinner/index';
 import { EuiPagination } from '@elastic/eui';
-import Search from '../../components/custom/Search';
+import AdminSearch from '../../components/custom/AdminSearch';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import AdminIndex from '../../components/custom/Admin/AdminIndex';
 import AdminUsers from '../../components/custom/Admin/AdminUsers';

@@ -1,6 +1,10 @@
 import axios from './axios';
 import config from '../config';
-import { IArticle, IArticlePreview } from './article';
+import {
+  IArticle,
+  IArticlePreview,
+  IArticlePreviewPagination,
+} from './article';
 
 const ENDPOINT = '/public/article/';
 
@@ -33,10 +37,24 @@ export async function fetchLatest(id: string, count: number) {
   return res.data;
 }
 
+export async function searchByTitle(
+  pageNumber: number,
+  pageSize: number,
+  title: string
+) {
+  const res = await axios.get<IArticlePreviewPagination>(
+    config.apiLink +
+      ENDPOINT +
+      `search/title/${pageNumber}/${pageSize}/${title}`
+  );
+  return res.data;
+}
+
 const exported = {
   fetchBySlug,
   getHomePage,
   fetchLatest,
+  searchByTitle,
 };
 
 export default exported;

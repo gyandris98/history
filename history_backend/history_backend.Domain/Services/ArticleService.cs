@@ -112,12 +112,35 @@ namespace history_backend.Domain.Services
         {
             (var count, var articles) = await articleRepository.SearchByTag(pageNumber, pageSize, tag);
             var previews = articles.Select(article => ConvertArticleToPreview(article)).ToList();
-            Console.WriteLine(count);
+
             return new ArticlePreviewPaginationResponse
             {
                 TotalCount = count,
                 PageNumber = pageNumber,
                 Articles = previews
+            };
+        }
+
+        public async Task<ArticlePreviewPaginationResponse> TitleSearch(int pageNumber, int pageSize, string title) 
+        {
+            (var count, var articles) = await articleRepository.SearchByTitle(pageNumber, pageSize, title);
+            var previews = articles.Select(article => ConvertArticleToPreview(article)).ToList();
+
+            return new ArticlePreviewPaginationResponse
+            {
+                TotalCount = count,
+                PageNumber = pageNumber,
+                Articles = previews
+            };
+        }
+
+        public async Task<TagResponse> PartialTagSearch(string query)
+        {
+            (var count, var tags) = await articleRepository.SearchPartialTag(query);
+            return new TagResponse
+            {
+                TitleCount = count,
+                Tags = tags
             };
         }
 

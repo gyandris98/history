@@ -44,6 +44,12 @@ namespace history_backend.API.Controllers
             return await articleService.GetById(id);
         }
 
+        [HttpGet("search/title/{pageNumber}/{pageSize}/{title}")]
+        public async Task<ActionResult<ArticlePreviewPaginationResponse>> SearchByTitle(int pageNumber, int pageSize, string title)
+        {
+            return await articleService.TitleSearch(pageNumber, pageSize, title);
+        }
+
 
         [HttpGet("{year}/{month}/{day}/{slug}")]
         public async Task<ActionResult<ClientArticle>> GetArticle(string year, string month, string day, string slug)
