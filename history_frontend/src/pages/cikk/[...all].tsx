@@ -267,7 +267,7 @@ const Article: FunctionComponent<ArticleProps> = ({ article, latest }) => {
             <LatestIcon icon={faBell} /> Legfrissebb
           </Latest>
           {latest.map(item => (
-            <ArticlePreview article={item} noLead />
+            <ArticlePreview article={item} noLead inArticle />
           ))}
         </RightColumn>
       </Body>
@@ -277,6 +277,7 @@ const Article: FunctionComponent<ArticleProps> = ({ article, latest }) => {
 
 export const getServerSideProps = async ({ query }) => {
   const { all }: { all: string[] } = query;
+  console.log(all);
   const article = await articleAPI.fetchBySlug({
     year: all[0],
     month: all[1],

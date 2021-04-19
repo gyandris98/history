@@ -65,6 +65,7 @@ interface ArticlePreviewProps {
   noLead?: boolean;
   titlePosition?: 'side' | 'bottom';
   titleSize?: 'small' | 'large';
+  inArticle?: boolean;
 }
 
 function getElement(titleSize: string) {
@@ -82,15 +83,16 @@ const ArticlePreview: FunctionComponent<ArticlePreviewProps> = ({
   noLead,
   titleSize = 'small',
   titlePosition = 'bottom',
+  inArticle,
 }) => {
   const date = dayjs(article.createdAt);
   const Title = getElement(titleSize);
   return (
     <Wrapper>
       <Link
-        href={`cikk/${date.year()}/${date.month() + 1}/${date.day()}/${
-          article.slug
-        }`}>
+        href={`${!inArticle ? `cikk/` : ``}${date.year()}/${
+          date.month() + 1
+        }/${date.day()}/${article.slug}`}>
         <div>
           <Clickable>
             {titlePosition === 'bottom' ? (
