@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import { EuiPagination, EuiSpacer } from '@elastic/eui';
 import SearchResult from '../../../components/custom/Search/SearchResult';
+import config from '../../../config';
 
 interface TagProps {
   articles: IArticlePreview[];
-  count: number;
   tag: string;
 }
 
@@ -56,68 +56,24 @@ const Pagination = styled(EuiPagination)`
 
 const Lead = styled.p``;
 
-const Tag: FunctionComponent<TagProps> = ({ articles, tag, count }) => {
+const Tag: FunctionComponent<TagProps> = ({ articles, tag }) => {
   return (
     <SearchResult
-      // count={count}
-      // articles={articles}
       searchTerm={tag}
       searchBy={tagAPI.fetchByTag}
+      // initialData={articles}
     />
   );
-  // const [items, setItems] = useState<IArticlePreview[]>(articles);
-  // const [pageNumber, setPageNumber] = useState(1);
-  // const [pageSize, setPageSize] = useState(1);
-  // const [totalCount, setTotalCount] = useState(count);
-
-  // const query = useQuery(
-  //   ['articlepreviews', { pageNumber, pageSize }],
-  //   async params => {
-  //     const data = await tagAPI.fetchByTag(pageNumber, pageSize, tag);
-  //     setItems(data.articles);
-  //     setPageNumber(data.pageNumber);
-  //     setTotalCount(data.totalCount);
-  //     setPageSize(pageSize);
-  //     return data;
-  //   }
-  // );
-
-  // const goToPage = (page: number) => {
-  //   setPageNumber(page + 1);
-  // };
-
-  // return (
-  //   <Container>
-  //     <TagName>
-  //       "{tag}" ({totalCount})
-  //     </TagName>
-  //     {items.map((item, key) => (
-  //       <Preview>
-  //         <Image src={item.cover.url} />
-  //         <Body>
-  //           <Title>{item.title}</Title>
-  //           <Lead>{item.lead}</Lead>
-  //         </Body>
-  //       </Preview>
-  //     ))}
-  //     <Pagination
-  //       pageCount={Math.ceil(totalCount / pageSize)}
-  //       activePage={pageNumber - 1}
-  //       onPageClick={activePage => goToPage(activePage)}
-  //     />
-  //   </Container>
-  // );
 };
 
 export async function getServerSideProps(context) {
   const { tag } = context.query;
-  // const response = await tagAPI.fetchByTag(1, 10, tag);
+  //  const result = await tagAPI.fetchByTag(1, config.searchPageSize, tag);
 
   return {
     props: {
-      // articles: response.articles,
-      // count: response.totalCount,
       tag,
+      //  articles: result.articles,
     },
   };
 }

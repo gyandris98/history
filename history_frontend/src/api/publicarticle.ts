@@ -6,6 +6,13 @@ import {
   IArticlePreviewPagination,
 } from './article';
 
+export interface ISlug {
+  year: string;
+  month: string;
+  day: string;
+  slug: string;
+}
+
 const ENDPOINT = '/public/article/';
 
 export async function getHomePage() {
@@ -50,8 +57,17 @@ export async function searchByTitle(
   return res.data;
 }
 
+export async function fetchSlugs(count?: number) {
+  var countRequest = count ? count : '';
+  const res = await axios.get<ISlug[]>(
+    `${config.apiLink}${ENDPOINT}slugs/${countRequest}`
+  );
+  return res.data;
+}
+
 const exported = {
   fetchBySlug,
+  fetchSlugs,
   getHomePage,
   fetchLatest,
   searchByTitle,

@@ -6,6 +6,7 @@ import { IArticle } from './../api/article';
 import dayjs from 'dayjs';
 import ArticlePreview from '../components/custom/ArticlePreview';
 import styled from 'styled-components';
+import { GetStaticProps } from 'next';
 
 interface HomePageProps {
   articles: IArticle[];
@@ -47,38 +48,39 @@ const Mobile = styled.div`
 const Index: FunctionComponent<HomePageProps> = ({ articles }) => {
   return (
     <>
-    <Desktop>
-<Page>
-      <Column wide>
+      <Desktop>
+        <Page>
+          <Column wide>
+            <ArticlePreview article={articles[0]} titleSize="large" />
+            {articles.slice(3).map(item => (
+              <ArticlePreview article={item} key={item.id} noCover />
+            ))}
+          </Column>
+          <Column>
+            <ArticlePreview article={articles[1]} noLead />
+            <ArticlePreview article={articles[2]} noLead />
+          </Column>
+        </Page>
+      </Desktop>
+      <Mobile>
         <ArticlePreview article={articles[0]} titleSize="large" />
-        {articles.slice(3).map(item => (
-          <ArticlePreview article={item} key={item.id} noCover />
-        ))}
-      </Column>
-      <Column>
         <ArticlePreview article={articles[1]} noLead />
         <ArticlePreview article={articles[2]} noLead />
-      </Column>
-    </Page>
-    </Desktop>
-    <Mobile>
-      <ArticlePreview article={articles[0]} titleSize="large" />
-      <ArticlePreview article={articles[1]} noLead />
-        <ArticlePreview article={articles[2]} noLead />
         {articles.slice(3).map(item => (
           <ArticlePreview article={item} key={item.id} noCover />
         ))}
-    </Mobile>
+      </Mobile>
     </>
   );
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const articles = await articleAPI.getHomePage();
   return {
     props: {
       articles,
     },
+    revalidate: 30 * 60, // Half an hour
   };
 };
 

@@ -237,6 +237,12 @@ const renderBlock = (block, key) => {
 };
 
 const Article: FunctionComponent<ArticleProps> = ({ article, latest }) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <h1>Loading...</h1>;
+  }
+  console.log(article);
   return (
     <Page>
       <Title>{article.title}</Title>
@@ -275,8 +281,8 @@ const Article: FunctionComponent<ArticleProps> = ({ article, latest }) => {
   );
 };
 
-export const getServerSideProps = async ({ query }) => {
-  const { all }: { all: string[] } = query;
+export const getStaticProps = async ({ params, ...rest }) => {
+  const { all }: { all: string[] } = params;
   console.log(all);
   const article = await articleAPI.fetchBySlug({
     year: all[0],
@@ -284,12 +290,27 @@ export const getServerSideProps = async ({ query }) => {
     day: all[2],
     slug: all[3],
   });
+  console.log(article);
   const latest = await articleAPI.fetchLatest(article.id, 3);
   return {
     props: {
       article,
       latest,
     },
+  };
+};
+
+export const getStaticPaths = async () => {
+  const slugs = await articleAPI.fetchSlugs();
+  const paths = slugs.map(slug => ({
+    params: {
+      all: Object.values(slug),
+    },
+  }));
+
+  return {
+    paths,
+    fallback: 'blocking',
   };
 };
 

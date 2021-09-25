@@ -36,7 +36,7 @@ namespace history_backend.API.Controllers
             {
                 return BadRequest(e.Message);
             }
-        } 
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ClientArticle>> Article(string id)
@@ -48,6 +48,12 @@ namespace history_backend.API.Controllers
         public async Task<ActionResult<ArticlePreviewPaginationResponse>> SearchByTitle(int pageNumber, int pageSize, string title)
         {
             return await articleService.TitleSearch(pageNumber, pageSize, title);
+        }
+
+        [HttpGet("slugs/{count?}")]
+        public async Task<ActionResult<List<ArticleSlug>>> GetSlugs(int count = 100)
+        {
+            return await articleService.GetArticleSlugs(count);
         }
 
 

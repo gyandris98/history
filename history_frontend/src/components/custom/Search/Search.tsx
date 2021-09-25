@@ -78,16 +78,27 @@ interface SearchProps {
 
 const Search: FunctionComponent<SearchProps> = () => {
   const [search, setSearch] = useState('');
+  const [displayedSearch, setDisplayedSearch] = useState('');
   const [open, setOpen] = useState(false);
   const { data, isFetched } = useQuery(`search/${search}`, async () => {
     return await tagAPI.searchByTagOrTitle(search);
   });
 
   const handleChange = ({ target }: { target: HTMLInputElement }) => {
-    setSearch(target.value);
+    setDisplayedSearch(target.value);
   };
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => setSearch(displayedSearch), 500);
+    return () => clearTimeout(timeoutId);
+  }, [displayedSearch]);
+
   const input = (
-    <CustomInput placeholder="Keresés" onChange={handleChange} value={search} />
+    <CustomInput
+      placeholder="Keresés"
+      onChange={handleChange}
+      value={displayedSearch}
+    />
   );
   useEffect(() => {
     if (data) {

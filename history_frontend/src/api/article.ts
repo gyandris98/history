@@ -36,17 +36,17 @@ export interface IArticlePreviewPagination {
   pageNumber: number;
 }
 
+export interface ISearchOutput {
+  query: string;
+  from?: string;
+  to?: string;
+}
+
 const ENDPOINT = '/article/';
 
 export async function createArticle(article) {
   const res = await axios.post<IArticle>(config.apiLink + ENDPOINT, article);
   return res.data;
-}
-
-export interface ISearchOutput {
-  query: string;
-  from?: string;
-  to?: string;
 }
 
 export async function fetchAdminArticlePreviews(
@@ -72,7 +72,6 @@ export async function fetchAdminArticlePreviewsSearch(
 }
 
 export async function fetchById(id: string, token: string) {
-  await new Promise((resolve, reject) => setTimeout(() => resolve(''), 1000));
   const res = await axios.get<IArticle>(config.apiLink + ENDPOINT + id);
   return res.data;
 }

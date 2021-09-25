@@ -60,28 +60,17 @@ namespace history_backend.Domain.Services
         public async Task<List<ArticlePreview>> GetArticlePreviews()
         {
             var articles = await articleRepository.List(10, 1);
-            var result = new List<ArticlePreview>();
-            foreach (var article in articles)
+            var previews = articles.Select(article => new ArticlePreview()
             {
-                //var user = await userRepository.FindById(article.UserId);
-                result.Add(new ArticlePreview
-                {
-                    Id = article.ID.ToString(),
-                    Title = article.Title,
-                    Lead = article.Lead,
-                    User = article.User,
-                    Cover = article.Cover,
-                    /*User = new ClientUser
-                    {
-                        Id = user.ID.ToString(),
-                        Email = user.Email,
-                        Name = user.Name
-                    },*/
-                    CreatedAt = article.CreatedAt,
-                    Slug = article.Slug
-                });
-            }
-            return result;
+                Id = article.ID.ToString(),
+                Title = article.Title,
+                Lead = article.Lead,
+                User = article.User,
+                Cover = article.Cover,
+                CreatedAt = article.CreatedAt,
+                Slug = article.Slug
+            }).ToList();
+            return previews;
         }
 
         public async Task<ArticlePreviewPaginationResponse> GetArticlePreviewsPagination(int pageNumber, int pageSize)
@@ -247,6 +236,19 @@ namespace history_backend.Domain.Services
             if (articles.Count == count + 1)
                 articles.RemoveAt(count);
             return articles.Select(item => ConvertArticleToPreview(item)).ToList();
+        }
+
+        public async Task<List<ArticleSlug>> GetArticleSlugs(int count)
+        {
+            var articles = await articleRepository.List(count, 1);
+            var slugs = articles.Select(article => new ArticleSlug()
+            {
+                Year = article.CreatedAt.Year.ToString(),
+                Month = article.CreatedAt.Month.ToString(),
+                Day = article.CreatedAt.Day.ToString(),
+                Slug = article.Slug
+            }).ToList();
+            return slugs;
         }
     }
 }

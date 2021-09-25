@@ -29,7 +29,7 @@ namespace history_backend.Domain.Services
             if (user == null) throw new Exception("User not found");
             if (!VerifyPassword(loginData.Password, user.PasswordHash, user.PasswordSalt)) throw new Exception("Incorrect password");
             
-            
+
             return GenerateJwtToken(user);
         }
 
@@ -128,6 +128,5 @@ namespace history_backend.Domain.Services
                 return Convert.ToBase64String(randomNumber);
             }
         }
-
     }
 }

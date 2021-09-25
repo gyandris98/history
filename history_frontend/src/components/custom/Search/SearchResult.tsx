@@ -7,6 +7,7 @@ import { EuiPagination, EuiSpacer } from '@elastic/eui';
 import { IArticlePreviewPagination } from './../../../api/article';
 import Link from 'next/link';
 import dayjs from 'dayjs';
+import config from '../../../config';
 
 interface SearchResultProps {
   searchTerm: string;
@@ -15,6 +16,7 @@ interface SearchResultProps {
     pageSize: number,
     query: string
   ) => Promise<IArticlePreviewPagination>;
+  initialData?: IArticlePreview[];
 }
 
 const Clickable = styled.div`
@@ -71,10 +73,11 @@ const Lead = styled.p``;
 const SearchResult: FunctionComponent<SearchResultProps> = ({
   searchTerm,
   searchBy,
+  initialData = [],
 }) => {
   const [items, setItems] = useState<IArticlePreview[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize, setPageSize] = useState(1);
+  const [pageSize, setPageSize] = useState(config.searchPageSize);
   const [totalCount, setTotalCount] = useState(0);
 
   const query = useQuery(
@@ -86,6 +89,9 @@ const SearchResult: FunctionComponent<SearchResultProps> = ({
       setTotalCount(data.totalCount);
       setPageSize(pageSize);
       return data;
+    },
+    {
+      initialData,
     }
   );
 

@@ -1,4 +1,4 @@
-import { AppProps } from 'next/app';
+import App, { AppProps } from 'next/app';
 import Head from 'next/head';
 import React, { FunctionComponent, useEffect } from 'react';
 import { EuiErrorBoundary } from '@elastic/eui';
@@ -34,7 +34,7 @@ loadUser();
  *
  * @see https://nextjs.org/docs/advanced-features/custom-app
  */
-const EuiApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
+const EuiApp = ({ Component, pageProps }) => {
   useEffect(() => {
     loadUser();
   }, []);
@@ -86,6 +86,16 @@ const EuiApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
       </QueryClientProvider>
     </>
   );
+};
+
+EuiApp.getInitialProps = async appContext => {
+  const appProps = await App.getInitialProps(appContext);
+  let pageProps = {};
+
+  if (appContext.Component.getInitialProps) {
+    pageProps = await appContext.Component.getInitialProps(appContext.ctx);
+  }
+  return { ...appProps, ...pageProps };
 };
 
 export default EuiApp;
