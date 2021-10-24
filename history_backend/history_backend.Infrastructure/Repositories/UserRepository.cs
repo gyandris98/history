@@ -13,10 +13,12 @@ namespace history_backend.Infrastructure.Repositories
     public class UserRepository : IUserRepository
     {
         private Database db;
+
         public UserRepository(Database db)
         {
             this.db = db;
         }
+
         public async Task Create(User user)
         {
             try
@@ -46,6 +48,7 @@ namespace history_backend.Infrastructure.Repositories
         {
             return await db.Users.Find(item => item.Email == email).FirstOrDefaultAsync();
         }
+
         public async Task<User> FindById(string id)
         {
             var objectid = ObjectId.Parse(id);
@@ -56,6 +59,7 @@ namespace history_backend.Infrastructure.Repositories
         {
             return await db.Users.Find(_ => true).Skip(pageSize * (pageNumber-1)).Limit(pageSize).ToListAsync();
         }
+
         public async Task<long> GetCount()
         {
             return await db.Users.CountDocumentsAsync(_ => true);
@@ -67,6 +71,7 @@ namespace history_backend.Infrastructure.Repositories
             user.Role = role;
             return user;
         }
+
         public async Task<User> UpdateInfo(string id, string name, string email)
         {
             var user = await db.Users.FindOneAndUpdateAsync(item => item.ID == ObjectId.Parse(id), Builders<User>.Update.Set(x => x.Email, email).Set(x => x.Name, name));
@@ -74,6 +79,7 @@ namespace history_backend.Infrastructure.Repositories
             user.Email = email;
             return user;
         }
+
         public async Task UpdatePassword(string id, byte[] passwordHash, byte[] passwordSalt)
         {
             var user = await db.Users.FindOneAndUpdateAsync(item => item.ID == ObjectId.Parse(id), Builders<User>.Update.Set(x => x.PasswordHash, passwordHash).Set(x => x.PasswordSalt, passwordSalt));

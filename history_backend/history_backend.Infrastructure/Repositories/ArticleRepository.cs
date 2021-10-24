@@ -15,11 +15,13 @@ namespace history_backend.Infrastructure.Repositories
 {
     public class ArticleRepository : IArticleRepository
     {
-        private Database db;
+        private readonly Database db;
+
         public ArticleRepository(Database db)
         {
             this.db = db;
         }
+
         public async Task Create(Domain.Entities.Article article)
         {
             try
@@ -63,52 +65,56 @@ namespace history_backend.Infrastructure.Repositories
         {
             return await db.Articles.CountDocumentsAsync(_ => true);
         }
-        public async Task<(long, List<Article>)> Search(int pageNumber, int pageSize, string query = null, DateTime? from = null, DateTime? to = null)
+
+        public async Task<(long Count, List<Article> Articles)> Search(int pageNumber, int pageSize, string query = null, DateTime? from = null, DateTime? to = null)
         {
             var dateQuery = new BsonDocument();
             if (from != default(DateTime) && to != default(DateTime))
             {
                 dateQuery.Add("CreatedAt", new BsonDocument
                 {
-                    {"$gte", from },
-                    {"$lt", to }
-                });
-            } else if (from != default(DateTime))
-            {
-                dateQuery.Add("CreatedAt", new BsonDocument
-                {
-                    {"$gte", from }
-                });
-            } else if (to != default(DateTime))
-            {
-                dateQuery.Add("CreatedAt", new BsonDocument
-                {
-                    {"$lt", to }
+                    { "$gte", from },
+                    { "$lt", to },
                 });
             }
-                
+            else if (from != default(DateTime))
+            {
+                dateQuery.Add("CreatedAt", new BsonDocument
+                {
+                    { "$gte", from },
+                });
+            }
+            else if (to != default(DateTime))
+            {
+                dateQuery.Add("CreatedAt", new BsonDocument
+                {
+                    { "$lt", to },
+                });
+            }
+
             if (!string.IsNullOrWhiteSpace(query))
             {
                 var criteria = new BsonRegularExpression(query, "i");
                 dateQuery.Add("Title", new BsonDocument
                 {
-                    {"$regex", criteria }
+                    { "$regex", criteria },
                 });
                 dateQuery.Add("Lead", new BsonDocument
                 {
-                    {"$regex", criteria }
+                    { "$regex", criteria },
                 });
                 dateQuery.Add("Body.Blocks.Data.Text", new BsonDocument
                 {
-                    {"$regex", criteria }
+                    { "$regex", criteria },
                 });
             }
+
             var count = await db.Articles.CountDocumentsAsync(dateQuery);
             var articles = await db.Articles.Find(dateQuery).SortByDescending(a => a.CreatedAt).Skip(pageSize * (pageNumber - 1)).Limit(pageSize).ToListAsync();
             return (count, articles);
         }
 
-        public async Task<(long, List<Article>)> SearchByTag(int pageNumber, int pageSize, string tag)
+        public async Task<(long Count, List<Article> Articles)> SearchByTag(int pageNumber, int pageSize, string tag)
         {
             var count = await db.Articles.CountDocumentsAsync(article => article.Tags.Contains(tag));
             var articles = await db.Articles
@@ -120,7 +126,7 @@ namespace history_backend.Infrastructure.Repositories
             return (count, articles);
         }
 
-        public async Task<(long, List<string>)> SearchPartialTag(string query)
+        public async Task<(long Count, List<string> Tags)> SearchPartialTag(string query)
         {
             FieldDefinition<Article, string> field = "Tags";
             var regex = new Regex(query, RegexOptions.IgnoreCase);
@@ -132,7 +138,7 @@ namespace history_backend.Infrastructure.Repositories
             return (titleCount, regexedTags);
         }
 
-        public async Task<(long, List<Article>)> SearchByTitle(int pageNumber, int pageSize, string title)
+        public async Task<(long Count, List<Article> Articles)> SearchByTitle(int pageNumber, int pageSize, string title)
         {
             var filter = Builders<Article>.Filter.Regex(x => x.Title, new BsonRegularExpression(title, "i"));
             var count = await db.Articles.CountDocumentsAsync(filter);
