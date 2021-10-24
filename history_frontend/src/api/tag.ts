@@ -9,6 +9,7 @@ export async function fetchByTag(
   pageSize: number,
   tag: string
 ) {
+  console.log(config.apiLink + ENDPOINT + `${pageNumber}/${pageSize}/${tag}`);
   const res = await axios.get<IArticlePreviewPagination>(
     config.apiLink + ENDPOINT + `${pageNumber}/${pageSize}/${tag}`
   );

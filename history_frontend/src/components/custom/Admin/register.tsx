@@ -35,6 +35,11 @@ const FormRow = styled(EuiFormRow)`
   width: 800px;
 `;
 
+const ErrorMessage = styled.p`
+  color: var(--accent);
+  margin-bottom: 0.5rem !important;
+`;
+
 interface IFormInput {
   name: string;
   email: string;
@@ -46,6 +51,7 @@ const formatValidation = formatError('register');
 export default function register() {
   const { register: registerFn } = useAuth();
   const { errors, register, handleSubmit } = useForm<IFormInput>();
+  const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState(false);
   //const router = useRouter();
   const history = useHistory();
@@ -56,7 +62,7 @@ export default function register() {
       const res = await registerFn(data);
       history.push('/');
     } catch (error) {
-      console.log(error);
+      setError('Regisztráció sikertelen.');
     } finally {
       setLoading(false);
     }
@@ -125,6 +131,13 @@ export default function register() {
             Bejelentkezés
           </EuiButton> */}
         <EuiSpacer />
+        {error.length > 0 && (
+          <FormRow>
+            <EuiText textAlign="center">
+              <ErrorMessage>{error}</ErrorMessage>
+            </EuiText>
+          </FormRow>
+        )}
         <FancyButton fullWidth type="submit" isLoading={loading}>
           Regisztráció
         </FancyButton>

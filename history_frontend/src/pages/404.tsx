@@ -1,21 +1,20 @@
 import React, { Fragment, FunctionComponent } from 'react';
-import { EuiButton, EuiEmptyPrompt } from '@elastic/eui';
+import { EuiEmptyPrompt } from '@elastic/eui';
 import Link from 'next/link';
+import FancyButton from './../components/custom/FancyButton/index';
 
 const NotFoundPage: FunctionComponent = () => (
   <EuiEmptyPrompt
     iconType="editorStrike"
-    title={<h2>Ack! There&apos;s nothing here.</h2>}
+    title={<h2>Itt nincs semmi.</h2>}
     body={
       <Fragment>
-        <p>You found a page that doesn&apos;t exist.</p>
+        <p>Ez az oldal nem létezik.</p>
       </Fragment>
     }
     actions={
       <Link href="/">
-        <EuiButton color="primary" fill>
-          Go Home
-        </EuiButton>
+        <FancyButton>Vissza a főoldalra</FancyButton>
       </Link>
     }
   />

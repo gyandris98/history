@@ -35,6 +35,11 @@ const Page = styled.div`
   display: flex;
 `;
 
+const ErrorMessage = styled.p`
+  color: var(--accent);
+  margin-bottom: 0.5rem !important;
+`;
+
 interface IFormInput {
   email: string;
   password: string;
@@ -45,6 +50,7 @@ const formatValidation = formatError('login');
 export default function login() {
   const { login } = useAuth();
   const { errors, register, handleSubmit } = useForm<IFormInput>();
+  const [error, setError] = useState<string>('');
   //const router = useRouter();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
@@ -55,7 +61,7 @@ export default function login() {
       const res = await login(data);
       history.push('/');
     } catch (error) {
-      console.log(error);
+      setError('Az email vagy jelszó nem megfelelő.');
     } finally {
       setLoading(false);
     }
@@ -103,9 +109,14 @@ export default function login() {
           />
         </FormRow>
 
-        {/* <EuiButton color="secondary" type="submit">
-          Bejelentkezés
-        </EuiButton> */}
+        {error.length > 0 && (
+          <FormRow>
+            <EuiText textAlign="center">
+              <ErrorMessage>{error}</ErrorMessage>
+            </EuiText>
+          </FormRow>
+        )}
+
         <EuiSpacer />
         <FancyButton fullWidth type="submit" isLoading={loading}>
           Bejelentkezés

@@ -19,13 +19,13 @@ namespace history_backend.API.Controllers
         [HttpGet("{pageNumber}/{pageSize}/{tag}")]
         public async Task<ActionResult<ArticlePreviewPaginationResponse>> SearchByTag(int pageNumber, int pageSize, string tag)
         {
-            return Ok(await service.TagSearch(pageNumber, pageSize, tag));
+            return await service.TagSearch(pageNumber, pageSize, tag);
         }
 
         [HttpGet("{query}")]
         public async Task<ActionResult<TagResponse>> SearchPartialTag(string query)
         {
-            return Ok(await service.PartialTagSearch(query));
+            return await service.PartialTagSearch(query);
         }
     }
 }
