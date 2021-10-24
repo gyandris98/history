@@ -4,9 +4,7 @@ using history_backend.Domain.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -18,17 +16,25 @@ namespace history_backend.Domain.Services
     {
         private readonly IUserRepository userRepository;
         private readonly IConfiguration config;
-        public AuthService(IUserRepository userRepository, IConfiguration config) 
-        { 
+
+        public AuthService(IUserRepository userRepository, IConfiguration config)
+        {
             this.userRepository = userRepository;
             this.config = config;
         }
+
         public async Task<string> Authenticate(Login loginData)
         {
             var user = await userRepository.FindByEmail(loginData.Email);
-            if (user == null) throw new Exception("User not found");
-            if (!VerifyPassword(loginData.Password, user.PasswordHash, user.PasswordSalt)) throw new Exception("Incorrect password");
-            
+            if (user is null)
+            {
+                throw new ArgumentException("User with this email not found.");
+            }
+
+            if (!VerifyPassword(loginData.Password, user.PasswordHash, user.PasswordSalt))
+            {
+                throw new ArgumentException("Incorrect password.");
+            }
 
             return GenerateJwtToken(user);
         }
@@ -36,27 +42,41 @@ namespace history_backend.Domain.Services
         public async Task<AuthenticateResponse> AuthenticateRefreshToken(Login loginData)
         {
             var user = await userRepository.FindByEmail(loginData.Email);
-            if (user == null)
-                throw new ArgumentException("User not found");
+            if (user is null)
+            {
+                throw new ArgumentException("User not found with this email.");
+            }
 
-            if (!VerifyPassword(loginData.Password, user.PasswordHash, user.PasswordSalt)) 
-                throw new ArgumentException("Incorrect password");
+            if (!VerifyPassword(loginData.Password, user.PasswordHash, user.PasswordSalt))
+            {
+                throw new ArgumentException("Incorrect password.");
+            }
 
             return new AuthenticateResponse
             {
                 AccessToken = GenerateJwtToken(user),
-                RefreshToken = GenerateRefreshToken(user)
+                RefreshToken = GenerateRefreshToken(user),
             };
         }
-        
+
         public async Task<AuthenticateResponse> Refresh(string id, string refreshToken)
         {
             var user = await userRepository.FindById(id);
-            if (user == null) throw new Exception("User not found");
+            if (user is null)
+            {
+                throw new ArgumentException("User not found with this email.");
+            }
 
             var token = user.RefreshTokens.Find(item => item.Token == refreshToken);
-            if (token == null) throw new Exception("Token not found");
-            if (token.IsExpired) throw new Exception("Token has expired");
+            if (token is null)
+            {
+                throw new ArgumentException("Invalid refresh token.");
+            }
+
+            if (token.IsExpired)
+            {
+                throw new ArgumentException("Refresh token has expired.");
+            }
 
             user.RefreshTokens.Remove(token);
             await userRepository.Replace(user);
@@ -64,17 +84,23 @@ namespace history_backend.Domain.Services
             return new AuthenticateResponse
             {
                 AccessToken = GenerateJwtToken(user),
-                RefreshToken = GenerateRefreshToken(user)
+                RefreshToken = GenerateRefreshToken(user),
             };
         }
 
         public async Task Logout(string id, string refreshToken)
         {
             var user = await userRepository.FindById(id);
-            if (user == null) throw new Exception("User not found");
+            if (user is null)
+            {
+                throw new ArgumentException("User not found with this email.");
+            }
 
             var token = user.RefreshTokens.Find(item => item.Token == refreshToken);
-            if (token == null) throw new Exception("Token not found");
+            if (token is null)
+            {
+                throw new ArgumentException("Invalid refresh token.");
+            }
 
             user.RefreshTokens.Remove(token);
             await userRepository.Replace(user);
@@ -87,9 +113,13 @@ namespace history_backend.Domain.Services
                 var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
                 for (int i = 0; i < computedHash.Length; i++)
                 {
-                    if (computedHash[i] != passwordHash[i]) return false;
+                    if (computedHash[i] != passwordHash[i])
+                    {
+                        return false;
+                    }
                 }
             }
+
             return true;
         }
 
@@ -101,7 +131,7 @@ namespace history_backend.Domain.Services
             {
                 Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()), new Claim(ClaimTypes.Name, user.Name), new Claim(ClaimTypes.Email, user.Email), new Claim(ClaimTypes.Role, user.Role) }),
                 Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
 
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -113,7 +143,7 @@ namespace history_backend.Domain.Services
             var refreshToken = new RefreshToken
             {
                 Token = GenerateRefreshToken(),
-                Expires = DateTime.UtcNow.AddDays(7)
+                Expires = DateTime.UtcNow.AddDays(7),
             };
             user.RefreshTokens.Add(refreshToken);
             userRepository.Replace(user);
@@ -124,11 +154,10 @@ namespace history_backend.Domain.Services
         private string GenerateRefreshToken()
         {
             var randomNumber = new byte[32];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(randomNumber);
-                return Convert.ToBase64String(randomNumber);
-            }
+            using var rng = RandomNumberGenerator.Create();
+
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace history_backend.Domain.DTO
 {
@@ -9,6 +6,7 @@ namespace history_backend.Domain.DTO
     {
         [Required]
         public string Name { get; set; }
+
         [Required]
         public string Email { get; set; }
     }

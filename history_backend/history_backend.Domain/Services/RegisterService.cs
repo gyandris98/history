@@ -2,8 +2,6 @@
 using history_backend.Domain.Entities;
 using history_backend.Domain.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +11,7 @@ namespace history_backend.Domain.Services
     {
         private readonly IUserRepository userRepository;
         private readonly AuthService authService;
+
         public RegisterService(IUserRepository userRepository, AuthService authService)
         {
             this.userRepository = userRepository;
@@ -33,28 +32,28 @@ namespace history_backend.Domain.Services
             user.PasswordSalt = salt;
             await userRepository.Create(user);
 
-            return await authService.Authenticate(new Login 
-            { 
-                Email = userData.Email, 
+            return await authService.Authenticate(new Login
+            {
+                Email = userData.Email,
                 Password = userData.Password,
             });
         }
 
-        private User CreateUser(Register userData)
+        private static User CreateUser(Register userData)
         {
             return new User
             {
                 Name = userData.Name,
                 Email = userData.Email,
-                Role = Role.Reader
+                Role = Role.Reader,
             };
         }
-        private (byte[], byte[]) CreatePasswordHash(string password)
+
+        private static (byte[] Hash, byte[] Salt) CreatePasswordHash(string password)
         {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
-            {
-                return (hmac.ComputeHash(Encoding.UTF8.GetBytes(password)), hmac.Key);
-            }
+            using var hmac = new System.Security.Cryptography.HMACSHA512();
+
+            return (hmac.ComputeHash(Encoding.UTF8.GetBytes(password)), hmac.Key);
         }
     }
 }

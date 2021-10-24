@@ -1,13 +1,11 @@
-﻿namespace history_backend.Domain.DTO
+﻿namespace history_backend.Domain.Entities.ArticleEntities
 {
-    public class ClientUser
+    public class ArticleUser
     {
         public string Id { get; set; }
 
         public string Name { get; set; }
 
         public string Email { get; set; }
-
-        public ClientRole Role { get; set; }
     }
 }

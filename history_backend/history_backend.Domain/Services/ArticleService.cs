@@ -3,13 +3,11 @@ using history_backend.Domain.Entities;
 using history_backend.Domain.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Security.Claims;
-using System.Text;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Slugify;
+using history_backend.Domain.Entities.ArticleEntities;
 
 namespace history_backend.Domain.Services
 {
@@ -17,22 +15,27 @@ namespace history_backend.Domain.Services
     {
         private readonly IArticleRepository articleRepository;
         private readonly IUserRepository userRepository;
+
         public ArticleService(IArticleRepository articleRepository, IUserRepository userRepository)
         {
             this.articleRepository = articleRepository;
             this.userRepository = userRepository;
         }
+
         public async Task<ClientArticle> CreateArticle(ArticleChange change, ClaimsPrincipal authUser)
         {
             var user = await userRepository.FindById(authUser.FindFirst(ClaimTypes.NameIdentifier).Value);
             if (user == null)
+            {
                 throw new ArgumentException("User not found");
+            }
 
             var scheduleTime = DateTime.Now;
-            if (change.Schedule != null)
+            /*if (change.Schedule != null)
             {
                 scheduleTime = change.Schedule;
-            }
+            }*/
+
             var article = new Article
             {
                 Body = change.Body,
@@ -42,14 +45,14 @@ namespace history_backend.Domain.Services
                 {
                     Id = user.ID.ToString(),
                     Name = user.Name,
-                    Email = user.Email
+                    Email = user.Email,
                 },
                 Cover = change.Cover,
                 CreatedAt = DateTime.Now,
                 Schedule = scheduleTime,
                 Author = change.Author,
                 Slug = new SlugHelper().GenerateSlug(change.Title),
-                Tags = change.Tags
+                Tags = change.Tags,
             };
 
             await articleRepository.Create(article);
@@ -67,7 +70,7 @@ namespace history_backend.Domain.Services
                 User = article.User,
                 Cover = article.Cover,
                 CreatedAt = article.CreatedAt,
-                Slug = article.Slug
+                Slug = article.Slug,
             }).ToList();
             return previews;
         }
@@ -80,7 +83,7 @@ namespace history_backend.Domain.Services
             {
                 TotalCount = await articleRepository.GetCount(),
                 PageNumber = pageNumber,
-                Articles = previews
+                Articles = previews,
             };
         }
 
@@ -92,7 +95,7 @@ namespace history_backend.Domain.Services
             {
                 TotalCount = count,
                 PageNumber = pageNumber,
-                Articles = previews
+                Articles = previews,
             };
         }
 
@@ -105,7 +108,7 @@ namespace history_backend.Domain.Services
             {
                 TotalCount = count,
                 PageNumber = pageNumber,
-                Articles = previews
+                Articles = previews,
             };
         }
 
@@ -118,7 +121,7 @@ namespace history_backend.Domain.Services
             {
                 TotalCount = count,
                 PageNumber = pageNumber,
-                Articles = previews
+                Articles = previews,
             };
         }
 
@@ -128,51 +131,59 @@ namespace history_backend.Domain.Services
             return new TagResponse
             {
                 TitleCount = count,
-                Tags = tags
+                Tags = tags,
             };
         }
 
         public async Task<ClientArticle> GetById(string id)
         {
             var article = await articleRepository.GetById(id);
-            if (article == null) throw new Exception();
+            if (article is null)
+            {
+                throw new ArgumentException($"Article with id {id} not found.");
+            }
+
             return await ConvertArticle(article);
         }
 
         public async Task Replace(string id, ArticleChange model)
         {
             var article = await articleRepository.GetById(id);
-            if (article == null) throw new Exception();
+            if (article is null)
+            {
+                throw new ArgumentException($"Article with id {id} not found.");
+            }
+
             if (article.Title != model.Title)
             {
                 article.Slug = new SlugHelper().GenerateSlug(model.Title);
             }
+
             article.Title = model.Title;
             article.Lead = model.Lead;
             article.Body = model.Body;
             article.Cover = model.Cover;
             article.Author = model.Author;
             article.Tags = model.Tags;
-            if (model.Schedule != null)
+            article.Schedule = model.Schedule;
+            /*if (model.Schedule != null)
                 article.Schedule = model.Schedule;
             else
-                article.Schedule = article.CreatedAt;
+                article.Schedule = article.CreatedAt;*/
             await articleRepository.Replace(article);
         }
 
-
         private async Task<ClientArticle> ConvertArticle(Article source)
         {
-            //var user = await userRepository.FindById(source.UserId);
+            // var user = await userRepository.FindById(source.UserId);
             // if (user == null) throw new Exception();
-            Console.WriteLine(source.Tags.Count);
             return new ClientArticle
             {
                 Id = source.ID.ToString(),
                 Title = source.Title,
                 Lead = source.Lead,
                 Body = source.Body,
-                user = source.User,
+                User = source.User,
                 Cover = source.Cover,
                 /*user = new ClientUser
                 {
@@ -184,9 +195,10 @@ namespace history_backend.Domain.Services
                 Slug = source.Slug,
                 Author = source.Author,
                 Schedule = source.Schedule,
-                Tags = source.Tags
+                Tags = source.Tags,
             };
         }
+
         private ArticlePreview ConvertArticleToPreview(Article article)
         {
             return new ArticlePreview
@@ -197,16 +209,17 @@ namespace history_backend.Domain.Services
                 User = article.User,
                 Cover = article.Cover,
                 CreatedAt = article.CreatedAt,
-                Slug = article.Slug
+                Slug = article.Slug,
             };
         }
+
         public async Task<List<ArticlePreview>> GetHomePage()
         {
             var articles = await articleRepository.List(10, 1, true);
             var result = new List<ArticlePreview>();
+
             foreach (var article in articles)
             {
-                
                 result.Add(new ArticlePreview
                 {
                     Id = article.ID.ToString(),
@@ -215,17 +228,20 @@ namespace history_backend.Domain.Services
                     User = article.User,
                     Cover = article.Cover,
                     CreatedAt = article.CreatedAt,
-                    Slug = article.Slug
+                    Slug = article.Slug,
                 });
             }
+
             return result;
         }
 
         public async Task<ClientArticle> GetBySlug(SlugQuery query)
         {
             var article = await articleRepository.GetBySlug(query);
-            if (article == null) 
+            if (article is null)
+            {
                 throw new ArgumentException("No article was found with these parameters.");
+            }
 
             return await ConvertArticle(article);
         }
@@ -235,7 +251,10 @@ namespace history_backend.Domain.Services
             var articles = await articleRepository.List(count + 1, 1, true);
             articles.RemoveAll(item => item.ID.ToString() == id);
             if (articles.Count == count + 1)
+            {
                 articles.RemoveAt(count);
+            }
+
             return articles.Select(item => ConvertArticleToPreview(item)).ToList();
         }
 
@@ -247,8 +266,9 @@ namespace history_backend.Domain.Services
                 Year = article.CreatedAt.Year.ToString(),
                 Month = article.CreatedAt.Month.ToString(),
                 Day = article.CreatedAt.Day.ToString(),
-                Slug = article.Slug
+                Slug = article.Slug,
             }).ToList();
+
             return slugs;
         }
     }

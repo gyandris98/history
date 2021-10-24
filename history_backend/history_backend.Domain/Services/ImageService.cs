@@ -3,10 +3,7 @@ using CloudinaryDotNet.Actions;
 using history_backend.Domain.DTO;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace history_backend.Domain.Services
@@ -15,6 +12,7 @@ namespace history_backend.Domain.Services
     {
         private readonly Cloudinary cloudinary;
         private readonly string folderLocation = "\\Upload\\Temp\\";
+
         public ImageService(Cloudinary cloudinary)
         {
             this.cloudinary = cloudinary;
@@ -24,7 +22,7 @@ namespace history_backend.Domain.Services
         {
             var uploadParams = new ImageUploadParams
             {
-                File = new FileDescription(path)
+                File = new FileDescription(path),
             };
             var uploadResult = await cloudinary.UploadAsync(uploadParams);
 
@@ -35,15 +33,15 @@ namespace history_backend.Domain.Services
                 Width = uploadResult.Width,
                 Height = uploadResult.Height,
                 Url = uploadResult.SecureUrl.ToString(),
-                Bytes = uploadResult.Bytes
+                Bytes = uploadResult.Bytes,
             };
         }
 
         public async Task<Image> UploadImage(IHostEnvironment env, FileUpload file)
         {
-            if (file.image == null)
+            if (file.image is null)
             {
-                throw new Exception("Not enough arguments");
+                throw new ArgumentException("Not enough arguments");
             }
 
             var directoryPath = env.ContentRootPath + folderLocation;
@@ -56,6 +54,7 @@ namespace history_backend.Domain.Services
                     {
                         Directory.CreateDirectory(directoryPath);
                     }
+
                     var filename = $"temp-{file.image.FileName}";
                     using FileStream fileStream = File.Create(directoryPath + filename);
                     await file.image.CopyToAsync(fileStream);
@@ -75,15 +74,16 @@ namespace history_backend.Domain.Services
                     {
                         f.Delete();
                     }
+
                     foreach (DirectoryInfo dir in di.GetDirectories())
                     {
                         dir.Delete(true);
                     }
                 }
-               
-            } else
+            }
+            else
             {
-                throw new Exception("Not enough arguments");
+                throw new ArgumentException("Not enough arguments");
             }
         }
 
@@ -95,7 +95,7 @@ namespace history_backend.Domain.Services
                 return new EditorImageUpload
                 {
                     File = image,
-                    Success = 1
+                    Success = 1,
                 };
             }
             catch (Exception)
@@ -103,6 +103,7 @@ namespace history_backend.Domain.Services
                 throw new Exception("Upload failed");
             }
         }
+
         public async Task<EditorImageUpload> UploadEditorImageByUrl(IHostEnvironment env, FileUploadByUrl file)
         {
             try
@@ -111,7 +112,7 @@ namespace history_backend.Domain.Services
                 return new EditorImageUpload
                 {
                     File = image,
-                    Success = 1
+                    Success = 1,
                 };
             }
             catch (Exception)
@@ -119,10 +120,14 @@ namespace history_backend.Domain.Services
                 throw new Exception("Upload failed");
             }
         }
+
         public async Task DeleteImage(string id)
         {
             var res = await cloudinary.DeleteResourcesAsync(ResourceType.Image, id);
-            if (res.DeletedCounts.Count == 0) throw new Exception("Error on delete");
+            if (res.DeletedCounts.Count == 0)
+            {
+                throw new Exception("Error on delete");
+            }
         }
     }
 }
