@@ -48,6 +48,7 @@ namespace history_backend.Domain.Services
         {
             if (!Role.AcceptedRoles.Contains(role))
                 throw new Exception("Unknown role name");
+
             var user = await userRepository.ChangeRole(id, role);
             return new ClientUser
             {

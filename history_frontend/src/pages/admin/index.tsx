@@ -2,7 +2,6 @@ import { networkInterfaces } from 'os';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import FancyButton from '../../components/custom/FancyButton';
 import NextEuiButton from '../../components/next_eui/button';
-import { authOnlyProps, contextAuth, useAuth } from '../../lib/auth';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import AdminNav from '../../components/custom/Admin/AdminNav';

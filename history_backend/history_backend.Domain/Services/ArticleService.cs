@@ -26,8 +26,8 @@ namespace history_backend.Domain.Services
         {
             var user = await userRepository.FindById(authUser.FindFirst(ClaimTypes.NameIdentifier).Value);
             if (user == null)
-                throw new Exception();
-            Console.WriteLine("User found");
+                throw new ArgumentException("User not found");
+
             var scheduleTime = DateTime.Now;
             if (change.Schedule != null)
             {
@@ -51,9 +51,8 @@ namespace history_backend.Domain.Services
                 Slug = new SlugHelper().GenerateSlug(change.Title),
                 Tags = change.Tags
             };
-            Console.WriteLine("Creating article");
+
             await articleRepository.Create(article);
-            Console.WriteLine("Article created");
             return await ConvertArticle(article);
         }
 
@@ -225,7 +224,9 @@ namespace history_backend.Domain.Services
         public async Task<ClientArticle> GetBySlug(SlugQuery query)
         {
             var article = await articleRepository.GetBySlug(query);
-            if (article == null) throw new Exception();
+            if (article == null) 
+                throw new ArgumentException("No article was found with these parameters.");
+
             return await ConvertArticle(article);
         }
 

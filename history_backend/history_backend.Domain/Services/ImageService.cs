@@ -24,7 +24,7 @@ namespace history_backend.Domain.Services
         {
             var uploadParams = new ImageUploadParams
             {
-                File = new CloudinaryDotNet.FileDescription(path)
+                File = new FileDescription(path)
             };
             var uploadResult = await cloudinary.UploadAsync(uploadParams);
 

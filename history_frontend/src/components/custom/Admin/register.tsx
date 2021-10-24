@@ -14,12 +14,17 @@ import {
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useAuth } from '../../../lib/auth';
 import { FieldError, useForm } from 'react-hook-form';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import FancyButton from '../FancyButton';
 import { formatError } from '../../../lib/validation';
 import { useHistory } from 'react-router-dom';
+
+const Page = styled.div`
+  padding: 14px;
+  display: flex;
+`;
 
 const Form = styled(EuiForm)`
   width: 100%;
@@ -39,7 +44,7 @@ interface IFormInput {
 const formatValidation = formatError('register');
 
 export default function register() {
-  const { login, register: registerFn } = useAuth();
+  const { register: registerFn } = useAuth();
   const { errors, register, handleSubmit } = useForm<IFormInput>();
   const [loading, setLoading] = useState(false);
   //const router = useRouter();
@@ -58,7 +63,7 @@ export default function register() {
   }
 
   return (
-    <EuiPage>
+    <Page>
       <Form component="form" onSubmit={handleSubmit(onSubmit)}>
         <FormRow>
           <EuiText textAlign="center">
@@ -125,9 +130,9 @@ export default function register() {
         </FancyButton>
         <EuiSpacer />
         <EuiText>
-          Van már fiókja? <Link href="/login">Lépjen be</Link>
+          Van már fiókja? <Link to="/login">Lépjen be</Link>
         </EuiText>
       </Form>
-    </EuiPage>
+    </Page>
   );
 }

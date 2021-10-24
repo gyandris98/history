@@ -87,12 +87,17 @@ const ArticlePreview: FunctionComponent<ArticlePreviewProps> = ({
 }) => {
   const date = dayjs(article.createdAt);
   const Title = getElement(titleSize);
+  console.log(
+    `${!inArticle ? `cikk/` : ``}${date.year()}/${
+      date.month() + 1
+    }/${date.date()}/${article.slug}`
+  );
   return (
     <Wrapper>
       <Link
         href={`${!inArticle ? `cikk/` : ``}${date.year()}/${
           date.month() + 1
-        }/${date.day()}/${article.slug}`}>
+        }/${date.date()}/${article.slug}`}>
         <div>
           <Clickable>
             {titlePosition === 'bottom' ? (

@@ -24,15 +24,20 @@ namespace history_backend.Domain.Services
             bool exists = await userRepository.Exists(userData.Email);
             if (exists)
             {
-                throw new Exception("User already exists");
+                throw new ArgumentException("User already exists");
             }
+
             var user = CreateUser(userData);
             (var hash, var salt) = CreatePasswordHash(userData.Password);
             user.PasswordHash = hash;
             user.PasswordSalt = salt;
             await userRepository.Create(user);
 
-            return await authService.Authenticate(new Login { Email = userData.Email, Password = userData.Password });
+            return await authService.Authenticate(new Login 
+            { 
+                Email = userData.Email, 
+                Password = userData.Password,
+            });
         }
 
         private User CreateUser(Register userData)

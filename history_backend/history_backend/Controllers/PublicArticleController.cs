@@ -70,9 +70,9 @@ namespace history_backend.API.Controllers
                     Slug = slug
                 }));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
            
         }

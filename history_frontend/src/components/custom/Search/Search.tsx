@@ -80,7 +80,7 @@ const Search: FunctionComponent<SearchProps> = () => {
   const [search, setSearch] = useState('');
   const [displayedSearch, setDisplayedSearch] = useState('');
   const [open, setOpen] = useState(false);
-  const { data, isFetched } = useQuery(`search/${search}`, async () => {
+  const { data } = useQuery(`search/${search}`, async () => {
     return await tagAPI.searchByTagOrTitle(search);
   });
 

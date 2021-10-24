@@ -45,7 +45,7 @@ const ArticlePreviewContainer = styled.div`
 const AdminIndex: FunctionComponent<AdminIndexProps> = () => {
   const [items, setItems] = useState<IArticlePreview[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize, setPageSize] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
   const [search, setSearch] = useState<ISearchOutput>({ query: '' });
 

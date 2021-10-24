@@ -79,31 +79,3 @@ const authConfig = {
 const { AuthProvider, useAuth } = initReactQueryAuth<User>(authConfig);
 
 export { AuthProvider, useAuth };
-
-export function contextAuth(context) {
-  const cookies = new Cookies(context.req, context.res);
-
-  const token = cookies.get('access_token');
-  try {
-    const user = jwt_decode(token);
-    return {
-      token,
-    };
-  } catch (error) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-}
-
-export const authOnlyProps = context => {
-  const redirect = contextAuth(context);
-  if (redirect) return redirect;
-
-  return {
-    props: {},
-  };
-};

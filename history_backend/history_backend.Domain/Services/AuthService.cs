@@ -36,9 +36,11 @@ namespace history_backend.Domain.Services
         public async Task<AuthenticateResponse> AuthenticateRefreshToken(Login loginData)
         {
             var user = await userRepository.FindByEmail(loginData.Email);
-            if (user == null) throw new Exception("User not found");
-            if (!VerifyPassword(loginData.Password, user.PasswordHash, user.PasswordSalt)) throw new Exception("Incorrect password");
+            if (user == null)
+                throw new ArgumentException("User not found");
 
+            if (!VerifyPassword(loginData.Password, user.PasswordHash, user.PasswordSalt)) 
+                throw new ArgumentException("Incorrect password");
 
             return new AuthenticateResponse
             {
@@ -80,7 +82,7 @@ namespace history_backend.Domain.Services
 
         private bool VerifyPassword(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            using (var hmac = new HMACSHA512(passwordSalt))
             {
                 var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
                 for (int i = 0; i < computedHash.Length; i++)

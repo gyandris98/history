@@ -17,7 +17,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import FancyButton from '../FancyButton';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { formatError } from '../../../lib/validation';
 import { useHistory } from 'react-router';
 
@@ -112,7 +112,7 @@ export default function login() {
         </FancyButton>
         <EuiSpacer />
         <EuiText>
-          Nincs még fiókja? <Link href="/register">Regisztráljon</Link>
+          Nincs még fiókja? <Link to="/register">Regisztráljon</Link>
         </EuiText>
       </Form>
     </Page>

@@ -43,10 +43,14 @@ namespace history_backend.Infrastructure.Repositories
             return await db.Articles.Find(item => item.ID == objectid).FirstOrDefaultAsync();
         }
 
-        public async Task<Article> GetBySlug(Domain.DTO.SlugQuery query)
+        public async Task<Article> GetBySlug(SlugQuery query)
         {
+            var from = new DateTime(query.Year, query.Month, query.Day);
+            var to = from.AddDays(1);
+
             return await db.Articles
-                .Find(item => item.Slug == query.Slug /*&& item.CreatedAt.Year == query.Year && item.CreatedAt.Month == query.Month && item.CreatedAt.Day == query.Day*/)
+                .Find(item => item.CreatedAt >= from && item.CreatedAt < to && item.Slug == query.Slug)
+                .SortByDescending(a => a.CreatedAt)
                 .FirstOrDefaultAsync();
         }
 
@@ -83,7 +87,7 @@ namespace history_backend.Infrastructure.Repositories
                 });
             }
                 
-            if (query.Length > 0)
+            if (!string.IsNullOrWhiteSpace(query))
             {
                 var criteria = new BsonRegularExpression(query, "i");
                 dateQuery.Add("Title", new BsonDocument
@@ -102,16 +106,17 @@ namespace history_backend.Infrastructure.Repositories
             var count = await db.Articles.CountDocumentsAsync(dateQuery);
             var articles = await db.Articles.Find(dateQuery).SortByDescending(a => a.CreatedAt).Skip(pageSize * (pageNumber - 1)).Limit(pageSize).ToListAsync();
             return (count, articles);
-            
         }
 
         public async Task<(long, List<Article>)> SearchByTag(int pageNumber, int pageSize, string tag)
         {
-            var tagQuery = new BsonDocument();
-            tagQuery.Add("Tags", tag);
+            var count = await db.Articles.CountDocumentsAsync(article => article.Tags.Contains(tag));
+            var articles = await db.Articles
+                .Find(article => article.Tags.Contains(tag))
+                .SortByDescending(a => a.CreatedAt).Skip(pageSize * (pageNumber - 1))
+                .Limit(pageSize)
+                .ToListAsync();
 
-            var count = await db.Articles.CountDocumentsAsync(tagQuery);
-            var articles = await db.Articles.Find(tagQuery).SortByDescending(a => a.CreatedAt).Skip(pageSize * (pageNumber - 1)).Limit(pageSize).ToListAsync();
             return (count, articles);
         }
 

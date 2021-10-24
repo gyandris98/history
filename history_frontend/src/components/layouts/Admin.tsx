@@ -1,7 +1,7 @@
 import React from 'react';
 import NoSSR from '../noSSR';
 import { AppProps } from 'next/app';
-import { authOnlyProps } from '../../lib/auth';
+// import { authOnlyProps } from '../../lib/auth';
 import { NextComponentType, NextPageContext } from 'next';
 import styled from 'styled-components';
 
@@ -22,4 +22,4 @@ export const Admin: React.FC<AdminProps> = ({
   return <NoSSR>{Component ? <Component {...pageProps} /> : children}</NoSSR>;
 };
 
-export const getServerSideProps = authOnlyProps;
+// export const getServerSideProps = authOnlyProps;

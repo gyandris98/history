@@ -23,7 +23,6 @@ import ArticleEditor, {
 } from '../../../components/custom/ArticleEditor/ArticleEditor';
 import Editor from '../../../components/layouts/AdminLayout';
 import AdminLayout from '../../../components/layouts/AdminLayout';
-import { contextAuth } from '../../../lib/auth';
 import CustomButton from '../../../components/custom/CustomButton';
 import { useHistory } from 'react-router';
 
@@ -51,7 +50,7 @@ const NewArticle: FunctionComponent<NewArticleProps> = () => {
   };
 
   return (
-    <Admin>
+    <>
       <EuiSpacer />
       <AdminLayout
         path="new"
@@ -65,7 +64,7 @@ const NewArticle: FunctionComponent<NewArticleProps> = () => {
           handleArticleSubmit={onArticleSubmit}
         />
       </AdminLayout>
-    </Admin>
+    </>
   );
 };
 

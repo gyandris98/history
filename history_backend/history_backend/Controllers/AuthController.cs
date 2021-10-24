@@ -25,6 +25,7 @@ namespace history_backend.API.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
             try
             {
                 var token = await registerService.Register(userData);
@@ -76,9 +77,10 @@ namespace history_backend.API.Controllers
             try
             {
                 var refreshToken = HttpContext.Request.Cookies.Where(item => item.Key == "refresh_token").FirstOrDefault();
-                Console.WriteLine(refreshToken);
-                if (refreshToken.Equals(default(KeyValuePair<string, string>))) throw new Exception("Token not found");
-                Console.WriteLine(id);
+
+                if (refreshToken.Equals(default(KeyValuePair<string, string>))) 
+                    throw new ArgumentException("Token not found");
+
                 var response = await authService.Refresh(id, refreshToken.Value);
                 HttpContext.Response.Cookies.Append("refresh_token", response.RefreshToken.Token, new Microsoft.AspNetCore.Http.CookieOptions {
                     HttpOnly = true,
@@ -92,7 +94,7 @@ namespace history_backend.API.Controllers
             }
             catch (Exception)
             {
-                return Unauthorized("Token expired");
+                return Unauthorized("Token invalid or expired");
             }
         }
 

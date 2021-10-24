@@ -68,12 +68,12 @@ const Tag: FunctionComponent<TagProps> = ({ articles, tag }) => {
 
 export async function getServerSideProps(context) {
   const { tag } = context.query;
-  //  const result = await tagAPI.fetchByTag(1, config.searchPageSize, tag);
+  // const result = await tagAPI.fetchByTag(1, config.searchPageSize, tag);
 
   return {
     props: {
       tag,
-      //  articles: result.articles,
+      // articles: result.articles,
     },
   };
 }

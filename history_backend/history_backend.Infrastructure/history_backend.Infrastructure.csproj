@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+  
+  <Import Project="$(MSBuildProjectDirectory)\..\history_backend.props" />
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.12.0-beta1" />
