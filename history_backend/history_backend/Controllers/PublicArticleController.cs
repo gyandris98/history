@@ -1,10 +1,8 @@
 ﻿using history_backend.Domain.DTO;
 using history_backend.Domain.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace history_backend.API.Controllers
@@ -14,6 +12,7 @@ namespace history_backend.API.Controllers
     public class PublicArticleController : ControllerBase
     {
         private readonly ArticleService articleService;
+
         public PublicArticleController(ArticleService articleService)
         {
             this.articleService = articleService;
@@ -24,6 +23,7 @@ namespace history_backend.API.Controllers
         {
             return await articleService.GetHomePage();
         }
+
         [HttpGet("{id}/latest/{count}")]
         public async Task<ActionResult<List<ArticlePreview>>> GetLatest(string id, string count)
         {
@@ -56,7 +56,6 @@ namespace history_backend.API.Controllers
             return await articleService.GetArticleSlugs(count);
         }
 
-
         [HttpGet("{year}/{month}/{day}/{slug}")]
         public async Task<ActionResult<ClientArticle>> GetArticle(string year, string month, string day, string slug)
         {
@@ -67,15 +66,13 @@ namespace history_backend.API.Controllers
                     Year = Convert.ToInt32(year),
                     Month = Convert.ToInt32(month),
                     Day = Convert.ToInt32(day),
-                    Slug = slug
+                    Slug = slug,
                 }));
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
-           
         }
-
     }
 }

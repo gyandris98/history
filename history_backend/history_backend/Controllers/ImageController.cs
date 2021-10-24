@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace history_backend.API.Controllers
@@ -16,11 +14,13 @@ namespace history_backend.API.Controllers
     {
         private readonly ImageService service;
         private readonly IWebHostEnvironment webHostEnvironment;
+
         public ImageController(IWebHostEnvironment environment, ImageService service)
         {
             this.service = service;
             webHostEnvironment = environment;
         }
+
         [HttpPost]
         [Authorize(Roles = Role.AdminOrEditor)]
         public async Task<ActionResult<Image>> Upload([FromForm] FileUpload file)
@@ -34,6 +34,7 @@ namespace history_backend.API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         [HttpPost("editor")]
         [Authorize(Roles = Role.AdminOrEditor)]
         public async Task<ActionResult<EditorImageUpload>> UploadEditorImage([FromForm] FileUpload file)
@@ -47,6 +48,7 @@ namespace history_backend.API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         [HttpPost("editorurl")]
         [Authorize(Roles = Role.AdminOrEditor)]
         public async Task<ActionResult<EditorImageUpload>> UploadEditorImage([FromBody] FileUploadByUrl file)
@@ -60,6 +62,7 @@ namespace history_backend.API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         [HttpDelete("{id}")]
         [Authorize(Roles = Role.AdminOrEditor)]
         public async Task<ActionResult> Delete(string id)

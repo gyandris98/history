@@ -14,6 +14,7 @@ namespace history_backend.API.Controllers
     {
         private readonly RegisterService registerService;
         private readonly AuthService authService;
+
         public AuthController(RegisterService registerService, AuthService authService)
         {
             this.registerService = registerService;
@@ -24,7 +25,9 @@ namespace history_backend.API.Controllers
         public async Task<ActionResult> Register([FromBody] Register userData)
         {
             if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
+            }
 
             try
             {
@@ -36,6 +39,7 @@ namespace history_backend.API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         /*[HttpPost("login")]
         public async Task<ActionResult<string>> Login([FromBody] Login loginData)
         {
@@ -49,6 +53,7 @@ namespace history_backend.API.Controllers
                 return BadRequest("Incorrect username or password");
             }
         }*/
+
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login([FromBody] Login loginData)
         {
@@ -62,8 +67,9 @@ namespace history_backend.API.Controllers
                     IsEssential = true,
                     MaxAge = response.RefreshToken.Expires - DateTime.Now,
                     SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None,
-                    Secure = true
+                    Secure = true,
                 });
+
                 return Ok(response.AccessToken);
             }
             catch (Exception)
@@ -71,15 +77,18 @@ namespace history_backend.API.Controllers
                 return BadRequest("Incorrect username or password");
             }
         }
+
         [HttpGet("refresh/{id}")]
-        public async Task<ActionResult<String>> Refresh(string id)
+        public async Task<ActionResult<string>> Refresh(string id)
         {
             try
             {
                 var refreshToken = HttpContext.Request.Cookies.Where(item => item.Key == "refresh_token").FirstOrDefault();
 
-                if (refreshToken.Equals(default(KeyValuePair<string, string>))) 
-                    throw new ArgumentException("Token not found");
+                if (refreshToken.Equals(default(KeyValuePair<string, string>)))
+                {
+                    throw new ArgumentException("No refresh token included.");
+                }
 
                 var response = await authService.Refresh(id, refreshToken.Value);
                 HttpContext.Response.Cookies.Append("refresh_token", response.RefreshToken.Token, new Microsoft.AspNetCore.Http.CookieOptions {
@@ -88,8 +97,9 @@ namespace history_backend.API.Controllers
                     MaxAge = response.RefreshToken.Expires - DateTime.Now, 
                     IsEssential = true,
                     SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None,
-                    Secure = true
+                    Secure = true,
                 });
+
                 return Ok(response.AccessToken);
             }
             catch (Exception)
@@ -104,7 +114,11 @@ namespace history_backend.API.Controllers
             try
             {
                 var refreshToken = HttpContext.Request.Cookies.Where(item => item.Key == "refresh_token").FirstOrDefault();
-                if (refreshToken.Equals(default(KeyValuePair<string, string>))) throw new Exception("Token not found");
+                if (refreshToken.Equals(default(KeyValuePair<string, string>)))
+                {
+                    throw new Exception("Token not found");
+                }
+
                 await authService.Logout(id, refreshToken.Value);
                 return Ok();
             }

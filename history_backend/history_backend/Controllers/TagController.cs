@@ -1,9 +1,6 @@
 ﻿using history_backend.Domain.DTO;
 using history_backend.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace history_backend.API.Controllers
@@ -13,6 +10,7 @@ namespace history_backend.API.Controllers
     public class TagController : ControllerBase
     {
         private readonly ArticleService service;
+
         public TagController(ArticleService service)
         {
             this.service = service;
@@ -23,6 +21,7 @@ namespace history_backend.API.Controllers
         {
             return Ok(await service.TagSearch(pageNumber, pageSize, tag));
         }
+
         [HttpGet("{query}")]
         public async Task<ActionResult<TagResponse>> SearchPartialTag(string query)
         {

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using history_backend.Domain.Services;
 using history_backend.Domain.DTO;
@@ -14,16 +12,21 @@ namespace history_backend.API.Controllers
     public class ArticleController : ControllerBase
     {
         private readonly ArticleService service;
+
         public ArticleController(ArticleService service)
         {
             this.service = service;
         }
+
         [HttpPost]
         [Authorize(Roles = Role.AdminOrEditor)]
         public async Task<ActionResult<ClientArticle>> Create([FromBody] ArticleChange change)
         {
             if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
+            }
+
             try
             {
                 return await service.CreateArticle(change, User);
@@ -40,12 +43,14 @@ namespace history_backend.API.Controllers
         {
             return Ok(await service.GetArticlePreviews());
         }
+
         [HttpPost("{pageNumber}/{pageSize}")]
         [Authorize(Roles = Role.AdminOrEditor)]
         public async Task<ActionResult<ArticlePreviewPaginationResponse>> ListPaginated(int pageNumber, int pageSize, [FromBody] SearchQuery query)
         {
             return Ok(await service.ArticlePreviewSearch(pageNumber, pageSize, query));
         }
+
         [HttpGet("{id}")]
         [Authorize]
         public async Task<ActionResult<ClientArticle>> GetById(string id)
@@ -59,6 +64,7 @@ namespace history_backend.API.Controllers
                 return NotFound("Article not found");
             }
         }
+
         [HttpPut("{id}")]
         [Authorize(Roles = Role.AdminOrEditor)]
         public async Task<ActionResult> Update(string id, [FromBody] ArticleChange article)

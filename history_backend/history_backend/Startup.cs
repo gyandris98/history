@@ -5,32 +5,27 @@ using history_backend.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using CloudinaryDotNet;
 
 namespace history_backend
 {
     public class Startup
     {
+        private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -48,8 +43,9 @@ namespace history_backend
             });
             services.AddCors(options =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  builder =>
+                options.AddPolicy(
+                    name: MyAllowSpecificOrigins,
+                    builder =>
                                   {
                                       builder
                                       //.WithOrigins("https://localhost:3000/")
@@ -58,16 +54,17 @@ namespace history_backend
                                       .AllowAnyMethod()
                                       .AllowAnyHeader()
                                       .AllowCredentials()
-                                      .WithExposedHeaders("set-cookie") ;
-                                      
+                                      .WithExposedHeaders("set-cookie");
                                   });
             });
 
             // Database context
             services.AddTransient<Database>();
+
             // Repositories
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IArticleRepository, ArticleRepository>();
+
             // Services
             services.AddScoped<UserService>();
             services.AddScoped<RegisterService>();
@@ -86,7 +83,7 @@ namespace history_backend
                         ValidateIssuer = false,
                         ValidateAudience = false,
                         ValidateLifetime = true,
-                        ClockSkew = TimeSpan.Zero
+                        ClockSkew = TimeSpan.Zero,
                     };
                 });
         }
