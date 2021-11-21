@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Slugify;
 using history_backend.Domain.Entities.ArticleEntities;
+using Ganss.XSS;
 
 namespace history_backend.Domain.Services
 {
@@ -31,10 +32,21 @@ namespace history_backend.Domain.Services
             }
 
             var scheduleTime = DateTime.Now;
-            /*if (change.Schedule != null)
+            if (change.Schedule != null)
             {
                 scheduleTime = change.Schedule;
-            }*/
+            }
+
+            var sanitizer = new HtmlSanitizer();
+            change.Body.Blocks = change.Body.Blocks.Select(block =>
+            {
+                if (block.Data.Text != null)
+                    block.Data.Text = sanitizer.Sanitize(block.Data.Text);
+                if (block.Data.Caption != null)
+                    block.Data.Caption = sanitizer.Sanitize(block.Data.Caption);
+
+                return block;
+            }).ToList();
 
             var article = new Article
             {
@@ -159,6 +171,18 @@ namespace history_backend.Domain.Services
                 article.Slug = new SlugHelper().GenerateSlug(model.Title);
             }
 
+
+            var sanitizer = new HtmlSanitizer();
+            model.Body.Blocks = model.Body.Blocks.Select(block =>
+            {
+                if (block.Data.Text != null)
+                    block.Data.Text = sanitizer.Sanitize(block.Data.Text);
+                if (block.Data.Caption != null)
+                    block.Data.Caption = sanitizer.Sanitize(block.Data.Caption);
+
+                return block;
+            }).ToList();
+
             article.Title = model.Title;
             article.Lead = model.Lead;
             article.Body = model.Body;
@@ -166,10 +190,8 @@ namespace history_backend.Domain.Services
             article.Author = model.Author;
             article.Tags = model.Tags;
             article.Schedule = model.Schedule;
-            /*if (model.Schedule != null)
+            if (model.Schedule != null)
                 article.Schedule = model.Schedule;
-            else
-                article.Schedule = article.CreatedAt;*/
             await articleRepository.Replace(article);
         }
 
