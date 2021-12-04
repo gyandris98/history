@@ -1,21 +1,15 @@
 import {
-  EuiButton,
   EuiFieldText,
   EuiFieldPassword,
   EuiForm,
   EuiFormRow,
-  EuiPage,
   EuiText,
-  EuiLink,
-  EuiFlexGroup,
-  EuiFlexItem,
   EuiSpacer,
 } from '@elastic/eui';
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../../lib/auth';
-import { FieldError, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import FancyButton from '../FancyButton';
 import { formatError } from '../../../lib/validation';

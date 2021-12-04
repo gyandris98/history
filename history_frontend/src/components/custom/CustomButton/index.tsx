@@ -77,6 +77,7 @@ const Text = styled.span<{ hover?: boolean }>`
 const CustomButton: FunctionComponent<CustomButtonProps> = props => {
   const [hover, setHover] = useState(false);
   const width = widthData[props.width || 'normal'];
+  
   return props.loading ? (
     <Button
       {...props}

@@ -1,9 +1,3 @@
-/**
- * The functions here are for tracking and setting the current theme.
- * localStorage is used to store the currently preferred them, though
- * that doesn't work on the server, where we just use a default.
- */
-
 const selector = 'link[data-name="eui-theme"]';
 export const defaultTheme = 'amsterdam_light';
 
@@ -17,12 +11,9 @@ export function setTheme(newThemeName: string): void {
   localStorage.setItem('theme', newThemeName);
 
   for (const themeLink of getAllThemes()) {
-    // Disable all theme links, except for the desired theme, which we enable
     themeLink.disabled = themeLink.dataset.theme !== newThemeName;
   }
 
-  // Add a class to the `body` element that indicates which theme we're using.
-  // This allows any custom styling to adapt to the current theme.
   if (document.body.classList.contains(`appTheme-${oldThemeName}`)) {
     document.body.classList.replace(
       `appTheme-${oldThemeName}`,
@@ -55,7 +46,6 @@ export interface Theme {
   publicPath: string;
 }
 
-// This is supplied to the app as JSON by Webpack - see next.config.js
 export interface ThemeConfig {
   availableThemes: Array<Theme>;
   copyConfig: Array<{
@@ -64,5 +54,4 @@ export interface ThemeConfig {
   }>;
 }
 
-// The config is generated during the build and made available in a JSON string.
 export const themeConfig: ThemeConfig = JSON.parse(process.env.THEME_CONFIG!);

@@ -8,7 +8,6 @@ import articleAPI, {
   IArticlePreview,
   ISearchOutput,
 } from '../../../api/article';
-import { useAuth } from '../../../lib/auth';
 import AdminArticlePreview from '../AdminArticlePreview';
 import CustomButton from '../CustomButton';
 import AdminNav from './AdminNav';
@@ -51,7 +50,7 @@ const AdminIndex: FunctionComponent<AdminIndexProps> = () => {
 
   const query = useQuery(
     ['articlepreviews', { pageNumber, pageSize }],
-    async params => {
+    async _ => {
       const data = await articleAPI.fetchAdminArticlePreviewsSearch(
         pageNumber,
         pageSize,
@@ -69,7 +68,6 @@ const AdminIndex: FunctionComponent<AdminIndexProps> = () => {
     setPageNumber(page + 1);
   };
 
-  const { user } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -82,32 +80,18 @@ const AdminIndex: FunctionComponent<AdminIndexProps> = () => {
     }
   }, [query.error]);
 
-  const handleNewArticle = () => {
-    router.push('/admin/article/new');
+  const onSearch = async (data: ISearchOutput) => {
+    setSearch(data);
   };
 
-  const onSearch = async (data: ISearchOutput) => {
-    await setSearch(data);
-  };
   return (
     <Page>
       <Column>
         <AdminNav path="/" />
       </Column>
       <Middle>
-        {/* {JSON.stringify({ status, data, error, isFetching })} */}
-        {/* {JSON.stringify({ status, isFetching })} */}
-        {/* <p>Admin</p>
-      <p>{JSON.stringify(user)}</p>
-      <FancyButton onClick={handleNewArticle}>Új cikk</FancyButton> */}
-        {/* <ArticlePreviewContainer>
-        {[...Array(10)].map((item, index) => (
-          <AdminArticlePreview key={index} loading={true} />
-        ))}
-      </ArticlePreviewContainer> */}
         <AdminSearch onSearch={onSearch} />
         {query.status === 'loading' ? (
-          // <Spinner />
           <ArticlePreviewContainer>
             {[...Array(pageSize)].map((item, index) => (
               <AdminArticlePreview key={index} loading={true} />

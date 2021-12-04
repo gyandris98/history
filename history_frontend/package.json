@@ -1,32 +1,14 @@
 {
-  "name": "@elastic/next-eui-starter",
+  "name": "history",
   "private": true,
-  "description": "Start building protoypes quickly with the Next.js EUI Starter",
   "version": "1.0.0",
-  "author": "Rory Hunter <rory@elastic.co>",
-  "keywords": [
-    "next",
-    "kibana",
-    "eui",
-    "elastic",
-    "typescript"
-  ],
-  "license": "Apache-2.0",
+  "author": "András Győrffy",
   "scripts": {
     "analyze": "ANALYZE=true yarn build",
     "build": "yarn lint && rm -f public/themes/*.min.css && next build",
-    "build-docs": "bash scripts/update-docs.sh",
     "dev": "env NODE_TLS_REJECT_UNAUTHORIZED='0' next",
     "lint": "tsc && eslint --cache 'src/**/*.{ts,tsx,js}' --max-warnings 0",
-    "start": "next start",
-    "test-docs": "bash scripts/test-docs.sh"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/elastic/next-eui-starter"
-  },
-  "bugs": {
-    "url": "https://github.com/elastic/next-eui-starter/issues"
+    "start": "next start"
   },
   "dependencies": {
     "@editorjs/editorjs": "^2.19.1",
