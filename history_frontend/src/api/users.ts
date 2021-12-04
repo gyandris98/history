@@ -1,6 +1,5 @@
 import config from '../config';
 import axios from './axios';
-import { loadUser } from '../lib/auth';
 
 const ENDPOINT = '/users/';
 
@@ -36,7 +35,6 @@ export const roleOptions = [
 ];
 
 async function fetchUsers({
-  token,
   pageNumber,
   pageSize,
 }: {
@@ -44,23 +42,10 @@ async function fetchUsers({
   pageNumber: number;
   pageSize: number;
 }) {
-  await new Promise((resolve, reject) => setTimeout(() => resolve(''), 1000));
   const res = await axios.get<IUserPagination>(
     config.apiLink + ENDPOINT + `${pageNumber}/${pageSize}`
   );
   return res.data;
-  if (token?.length > 0) {
-    const res = await axios.get<IUserPagination>(
-      config.apiLink + ENDPOINT + `${pageNumber}/${pageSize}`
-    );
-    console.log(res.data);
-    return res.data;
-  } else {
-    const res = await axios.get<IUserPagination>(
-      config.apiLink + ENDPOINT + `${pageNumber}/${pageSize}`
-    );
-    return res.data;
-  }
 }
 
 async function deleteUsers(ids: string[]) {

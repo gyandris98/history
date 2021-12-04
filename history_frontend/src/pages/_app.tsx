@@ -1,12 +1,9 @@
-import App, { AppProps } from 'next/app';
+import App from 'next/app';
 import Head from 'next/head';
-import React, { FunctionComponent, useEffect } from 'react';
-import { EuiErrorBoundary } from '@elastic/eui';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import './app.scss';
 import './index.scss';
-
-import Chrome from '../components/chrome';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthProvider, loadUser } from '../lib/auth';
 import Navbar from '../components/custom/Navbar';
@@ -27,13 +24,6 @@ const Page = styled.div`
 
 loadUser();
 
-/**
- * Next.js uses the App component to initialize pages. You can override it
- * and control the page initialization. Here use use it to render the
- * `Chrome` component on each page, and apply an error boundary.
- *
- * @see https://nextjs.org/docs/advanced-features/custom-app
- */
 const EuiApp = ({ Component, pageProps }) => {
   useEffect(() => {
     loadUser();
@@ -43,7 +33,6 @@ const EuiApp = ({ Component, pageProps }) => {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <Head>
-            {/* You can override this in other pages - see page-2.tsx for an example */}
             <title>History</title>
             <link rel="preconnect" href="https://fonts.gstatic.com"></link>
             <link
@@ -76,11 +65,7 @@ const EuiApp = ({ Component, pageProps }) => {
           </Head>
           <Page>
             <Navbar />
-            {/* <Chrome>
-            <EuiErrorBoundary> */}
             <Component {...pageProps} />
-            {/* </EuiErrorBoundary>
-          </Chrome> */}
           </Page>
         </AuthProvider>
       </QueryClientProvider>

@@ -48,8 +48,6 @@ namespace history_backend
                     builder =>
                                   {
                                       builder
-                                      //.WithOrigins("https://localhost:3000/")
-                                      //.AllowAnyOrigin()
                                       .SetIsOriginAllowed(origin => true)
                                       .AllowAnyMethod()
                                       .AllowAnyHeader()

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import { IArticlePreview } from '../../../api/article';
 import articleAPI from '../../../api/publicarticle';
 import SearchResult from '../../../components/custom/Search/SearchResult';

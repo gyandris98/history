@@ -31,28 +31,24 @@ namespace history_backend.API.Controllers
 
             try
             {
-                var token = await registerService.Register(userData);
-                return Created("/register", token);
+                var response = await registerService.Register(userData);
+                HttpContext.Response.Cookies.Append("refresh_token", response.RefreshToken.Token, new Microsoft.AspNetCore.Http.CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = response.RefreshToken.Expires,
+                    IsEssential = true,
+                    MaxAge = response.RefreshToken.Expires - DateTime.Now,
+                    SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None,
+                    Secure = true,
+                });
+
+                return Created("/register", response.AccessToken);
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
-
-        /*[HttpPost("login")]
-        public async Task<ActionResult<string>> Login([FromBody] Login loginData)
-        {
-            try
-            {
-                var response = await authService.Authenticate(loginData);
-                return Ok(response);
-            }
-            catch (Exception)
-            {
-                return BadRequest("Incorrect username or password");
-            }
-        }*/
 
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login([FromBody] Login loginData)
@@ -125,7 +121,6 @@ namespace history_backend.API.Controllers
             catch (Exception)
             {
                 return Ok();
-                //return BadRequest("Token expired");
             }
         }
     }

@@ -148,7 +148,7 @@ const ArticleEditor: FunctionComponent<ArticleEditorProps> = ({
   const [coverLoading, setCoverLoading] = useState(false);
   const [tags, setTags] = useState<string[]>(defaultValues?.tags || []);
 
-  const { errors, register, handleSubmit, control } = useForm<IArticleInput>({
+  const { register, handleSubmit, control } = useForm<IArticleInput>({
     defaultValues: {
       title: defaultValues?.title ?? '',
       lead: defaultValues?.lead ?? '',
@@ -157,12 +157,11 @@ const ArticleEditor: FunctionComponent<ArticleEditorProps> = ({
     },
   });
 
-  const handleChange = (api: API, newData?: OutputData) => {
+  const handleChange = (_, newData?: OutputData) => {
     setData(newData);
   };
 
   const onSubmit = (formData: IArticleInput) => {
-    //console.log(formData);
     const scheduled = formData.schedule;
     delete formData.schedule;
     handleArticleSubmit({
@@ -256,7 +255,6 @@ const ArticleEditor: FunctionComponent<ArticleEditorProps> = ({
           <VerticalHr />
           <InputWrapper htmlFor="date">
             <InputTitle>ÜTEMEZÉS</InputTitle>
-            {/* <BorderlessInput name="date" type="text" id="date" ref={register} /> */}
             <Controller
               control={control}
               name="schedule"

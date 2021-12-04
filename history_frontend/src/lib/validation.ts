@@ -50,7 +50,6 @@ export function formatError(page: string) {
   return ({ error, field }: IFormatErrorInput) => {
     if (!error) return;
 
-    console.log(field, error.type, result);
     return result[field][error.type];
   };
 }

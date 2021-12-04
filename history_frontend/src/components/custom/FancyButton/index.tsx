@@ -2,13 +2,14 @@ import { EuiLoadingSpinner } from '@elastic/eui';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
-interface LoginButtonProps {
+interface LoginButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
   fill?: boolean;
   isLoading?: boolean;
 }
 
-const Button = styled.button<{ fullWidth: boolean; fill: boolean }>`
+const Button = styled.button<{ fullWidth?: boolean; fill?: boolean }>`
   text-decoration: none;
   font-family: 'Montserrat', sans serif;
   font-size: 16px;
@@ -34,9 +35,7 @@ const Button = styled.button<{ fullWidth: boolean; fill: boolean }>`
   border-radius: 30px;
 `;
 
-const FancyButton: FunctionComponent<
-  LoginButtonProps & React.HTMLProps<HTMLButtonElement>
-> = props => {
+const FancyButton: FunctionComponent<LoginButtonProps> = props => {
   const { isLoading } = props;
   return (
     <Button {...props}>

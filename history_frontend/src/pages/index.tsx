@@ -1,9 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import articleAPI from '../api/publicarticle';
-import Link from 'next/link';
-import MyComponent from '../components/my_component';
 import { IArticle } from './../api/article';
-import dayjs from 'dayjs';
 import ArticlePreview from '../components/custom/ArticlePreview';
 import styled from 'styled-components';
 import { GetStaticProps } from 'next';
@@ -46,6 +43,9 @@ const Mobile = styled.div`
 `;
 
 const Index: FunctionComponent<HomePageProps> = ({ articles }) => {
+  if (articles.length === 0) {
+    return <h1>Nincsenek még cikkek.</h1>;
+  }
   return (
     <>
       <Desktop>
@@ -57,15 +57,15 @@ const Index: FunctionComponent<HomePageProps> = ({ articles }) => {
             ))}
           </Column>
           <Column>
-            <ArticlePreview article={articles[1]} noLead />
-            <ArticlePreview article={articles[2]} noLead />
+            {articles[1] && <ArticlePreview article={articles[1]} noLead />}
+            {articles[2] && <ArticlePreview article={articles[2]} noLead />}
           </Column>
         </Page>
       </Desktop>
       <Mobile>
         <ArticlePreview article={articles[0]} titleSize="large" />
-        <ArticlePreview article={articles[1]} noLead />
-        <ArticlePreview article={articles[2]} noLead />
+        {articles[1] && <ArticlePreview article={articles[1]} noLead />}
+        {articles[2] && <ArticlePreview article={articles[2]} noLead />}
         {articles.slice(3).map(item => (
           <ArticlePreview article={item} key={item.id} noCover />
         ))}

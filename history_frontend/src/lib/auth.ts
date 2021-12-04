@@ -2,9 +2,7 @@ import { initReactQueryAuth } from 'react-query-auth';
 import userAPI, { User } from '../api/user';
 import jwt_decode from 'jwt-decode';
 import axios from '../api/axios';
-import { getCookieParser } from 'next/dist/next-server/server/api-utils';
 import JSCookies from 'js-cookie';
-import Cookies from 'cookies';
 
 const storage = {
   getToken: () => {
@@ -33,14 +31,12 @@ export async function handleUserResponse(data) {
 
 export async function loadUser(): Promise<User | null> {
   let user = null;
-  console.log('Loading user');
   const token = storage.getToken();
   if (token) {
-    const data = await jwt_decode<User>(token);
+    const data = jwt_decode<User>(token);
     user = data;
     user.token = token;
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    console.log(axios.defaults.headers.common);
     JSCookies.set('access_token', token);
   }
   return user;

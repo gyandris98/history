@@ -1,8 +1,6 @@
 import axios from './axios';
 import config from '../config';
 import { OutputData } from '@editorjs/editorjs';
-import { User } from './user';
-import { IArticleOutput } from '../components/custom/ArticleEditor/ArticleEditor';
 import { IImage } from './image';
 import { IUser } from './users';
 

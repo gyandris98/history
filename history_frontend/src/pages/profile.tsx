@@ -1,21 +1,8 @@
-import {
-  EuiFieldText,
-  EuiFlexGroup,
-  EuiFlexItem,
-  EuiForm,
-  EuiFormRow,
-  EuiPage,
-  EuiText,
-  EuiSpacer,
-  EuiGlobalToastList,
-} from '@elastic/eui';
+import { EuiFlexGroup, EuiFlexItem, EuiGlobalToastList } from '@elastic/eui';
 import React, { FunctionComponent, useState } from 'react';
-import FancyButton from '../components/custom/FancyButton';
 import { handleUserResponse, useAuth } from '../lib/auth';
 import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { formatError } from './../lib/validation';
 import BasicInfo from '../components/custom/Profile/BasicInfo';
 import { IBasicInfoInput } from './../components/custom/Profile/BasicInfo';
 import Password from '../components/custom/Profile/Password';
@@ -60,17 +47,14 @@ const prefabToasts = {
   },
 };
 
-const formatValidation = formatError('profile');
-
 const profile: FunctionComponent<profileProps> = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   if (!user) return null;
   const [toasts, setToasts] = useState([]);
   const [infoLoading, setInfoLoading] = useState(false);
   const removeToast = removedToast => {
     setToasts(toasts.filter(toast => toast.id !== removedToast.id));
   };
-  const router = useRouter();
 
   const onBasicInfoSubmit = async (data: IBasicInfoInput) => {
     setInfoLoading(true);

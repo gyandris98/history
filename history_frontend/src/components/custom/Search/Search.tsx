@@ -70,8 +70,6 @@ const TagCategory = styled(Tag)`
   }
 `;
 
-const ResultWrapper = styled.div``;
-
 interface SearchProps {
   close: () => void;
 }

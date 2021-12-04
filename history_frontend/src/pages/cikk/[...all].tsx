@@ -19,18 +19,6 @@ const Page = styled.div`
   margin: auto;
 `;
 
-const Column = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  width: calc((100vw - 1000px) / 2);
-`;
-
-const Middle = styled.div`
-  width: 100%;
-  max-width: 1000px;
-`;
-
 const Body = styled.div`
   display: flex;
   flex-direction: row;
@@ -187,28 +175,6 @@ const renderBlock = (block, key) => {
           key={key}
         />
       );
-    case 'embed':
-      return null;
-    //   return (
-    //     <div className={styles.embed} key={key}>
-    //       <ReactPlayer
-    //         url={block.data.source}
-    //         key={key}
-    //         style={{
-    //           margin: "auto",
-    //         }}
-    //         className={styles.embed}
-    //         controls={true}
-    //         width="100%"
-    //       />
-    //       {block.data.caption && (
-    //         <div
-    //           className={styles.embedCaption}
-    //           dangerouslySetInnerHTML={{ __html: block.data.caption }}
-    //         />
-    //       )}
-    //     </div>
-    //   );
     case 'quote':
       return (
         <QuoteContainer key={key}>
@@ -242,7 +208,6 @@ const Article: FunctionComponent<ArticleProps> = ({ article, latest }) => {
   if (router.isFallback) {
     return <h1>Loading...</h1>;
   }
-  console.log(article);
   return (
     <Page>
       <Title>{article.title}</Title>
@@ -281,16 +246,16 @@ const Article: FunctionComponent<ArticleProps> = ({ article, latest }) => {
   );
 };
 
-export const getStaticProps = async ({ params, ...rest }) => {
+export const getStaticProps = async ({ params }) => {
   const { all }: { all: string[] } = params;
-  console.log(all);
+
   const article = await articleAPI.fetchBySlug({
     year: all[0],
     month: all[1],
     day: all[2],
     slug: all[3],
   });
-  console.log(article);
+
   const latest = await articleAPI.fetchLatest(article.id, 3);
   return {
     props: {

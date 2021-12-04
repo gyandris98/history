@@ -1,5 +1,4 @@
 import Embed from '@editorjs/embed';
-import Paragraph from '@editorjs/paragraph';
 import Image from '@editorjs/image';
 import Header from '@editorjs/header';
 import Quote from '@editorjs/quote';

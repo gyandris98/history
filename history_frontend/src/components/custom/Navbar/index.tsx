@@ -8,13 +8,11 @@ import {
   EuiContextMenuItem,
   EuiContextMenuPanel,
   EuiPopover,
-  EuiTextColor,
 } from '@elastic/eui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSearch,
   faSignOutAlt,
-  faUser,
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import Search from '../Search/Search';
@@ -152,12 +150,7 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
     <>
       <Bar>
         <Link href="/">
-          <Brand
-            src="/images/logo-inverted.png"
-            width="180px"
-            height="34px"
-            //onClick={() => router.push('/')}
-          />
+          <Brand src="/images/logo-inverted.png" width="180px" height="34px" />
         </Link>{' '}
         {user && (
           <Link href="/admin">

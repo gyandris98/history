@@ -1,20 +1,14 @@
 import {
-  EuiButton,
   EuiFieldText,
   EuiFieldPassword,
   EuiForm,
   EuiFormRow,
-  EuiPage,
   EuiText,
-  EuiLink,
-  EuiFlexGroup,
-  EuiFlexItem,
   EuiSpacer,
 } from '@elastic/eui';
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../../lib/auth';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import FancyButton from '../FancyButton';
 import { Link } from 'react-router-dom';
@@ -51,7 +45,6 @@ export default function login() {
   const { login } = useAuth();
   const { errors, register, handleSubmit } = useForm<IFormInput>();
   const [error, setError] = useState<string>('');
-  //const router = useRouter();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
 

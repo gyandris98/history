@@ -1,15 +1,11 @@
 import {
   EuiFieldText,
-  EuiFlexGroup,
-  EuiFlexItem,
   EuiForm,
   EuiFormRow,
-  EuiPage,
-  EuiText,
   EuiSpacer,
+  EuiText,
 } from '@elastic/eui';
 import React, { FunctionComponent } from 'react';
-import FancyButton from '../../../components/custom/FancyButton';
 import { useAuth } from '../../../lib/auth';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -48,7 +44,6 @@ interface BasicInfoProps {
 }
 
 const prettyValidation = formatError('profile');
-console.log(prettyValidation);
 
 const BasicInfo: FunctionComponent<BasicInfoProps> = ({
   onSubmit,

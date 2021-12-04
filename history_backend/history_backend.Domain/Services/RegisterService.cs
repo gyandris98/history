@@ -18,7 +18,7 @@ namespace history_backend.Domain.Services
             this.authService = authService;
         }
 
-        public async Task<string> Register(Register userData)
+        public async Task<AuthenticateResponse> Register(Register userData)
         {
             bool exists = await userRepository.Exists(userData.Email);
             if (exists)
@@ -32,7 +32,7 @@ namespace history_backend.Domain.Services
             user.PasswordSalt = salt;
             await userRepository.Create(user);
 
-            return await authService.Authenticate(new Login
+            return await authService.AuthenticateRefreshToken(new Login
             {
                 Email = userData.Email,
                 Password = userData.Password,

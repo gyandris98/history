@@ -32,7 +32,7 @@ namespace history_backend.Domain.Services
             }
 
             var scheduleTime = DateTime.Now;
-            if (change.Schedule != null)
+            if (change.Schedule != DateTime.MinValue)
             {
                 scheduleTime = change.Schedule;
             }
@@ -68,7 +68,7 @@ namespace history_backend.Domain.Services
             };
 
             await articleRepository.Create(article);
-            return await ConvertArticle(article);
+            return ConvertArticle(article);
         }
 
         public async Task<List<ArticlePreview>> GetArticlePreviews()
@@ -155,7 +155,7 @@ namespace history_backend.Domain.Services
                 throw new ArgumentException($"Article with id {id} not found.");
             }
 
-            return await ConvertArticle(article);
+            return ConvertArticle(article);
         }
 
         public async Task Replace(string id, ArticleChange model)
@@ -189,16 +189,13 @@ namespace history_backend.Domain.Services
             article.Cover = model.Cover;
             article.Author = model.Author;
             article.Tags = model.Tags;
-            article.Schedule = model.Schedule;
-            if (model.Schedule != null)
+            if (model.Schedule != DateTime.MinValue)
                 article.Schedule = model.Schedule;
             await articleRepository.Replace(article);
         }
 
-        private async Task<ClientArticle> ConvertArticle(Article source)
+        private ClientArticle ConvertArticle(Article source)
         {
-            // var user = await userRepository.FindById(source.UserId);
-            // if (user == null) throw new Exception();
             return new ClientArticle
             {
                 Id = source.ID.ToString(),
@@ -207,12 +204,6 @@ namespace history_backend.Domain.Services
                 Body = source.Body,
                 User = source.User,
                 Cover = source.Cover,
-                /*user = new ClientUser
-                {
-                    Id = user.ID.ToString(),
-                    Email = user.Email,
-                    Name = user.Name
-                },*/
                 CreatedAt = source.CreatedAt,
                 Slug = source.Slug,
                 Author = source.Author,
@@ -265,7 +256,7 @@ namespace history_backend.Domain.Services
                 throw new ArgumentException("No article was found with these parameters.");
             }
 
-            return await ConvertArticle(article);
+            return ConvertArticle(article);
         }
 
         public async Task<List<ArticlePreview>> GetLatest(string id, int count)

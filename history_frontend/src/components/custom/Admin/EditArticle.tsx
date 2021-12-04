@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import React, { FunctionComponent, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import AdminLayout from '../../layouts/AdminLayout';
@@ -26,10 +25,8 @@ const EditArticle: FunctionComponent<EditArticleProps> = () => {
       history.push('/login');
     }
   }, [error]);
-  //console.log(article);
   const onSubmit = async (output: IArticleOutput) => {
     try {
-      console.log(output);
       await articleAPI.update(id, output);
       history.push('/');
     } catch (error) {}

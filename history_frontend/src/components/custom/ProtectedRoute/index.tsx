@@ -12,7 +12,6 @@ const ProtectedRoute: FunctionComponent<RouteProps & ProtectedRouteProps> = ({
   ...rest
 }) => {
   const { user } = useAuth();
-  console.log(user);
   const isAuthenticated = user && (user.role === role || user.role === 'Admin');
   return (
     <Route {...rest}>

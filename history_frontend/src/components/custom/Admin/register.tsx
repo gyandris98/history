@@ -53,7 +53,6 @@ export default function register() {
   const { errors, register, handleSubmit } = useForm<IFormInput>();
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState(false);
-  //const router = useRouter();
   const history = useHistory();
 
   async function onSubmit(data: IFormInput) {
@@ -127,9 +126,6 @@ export default function register() {
           />
         </FormRow>
 
-        {/* <EuiButton color="secondary" type="submit">
-            Bejelentkezés
-          </EuiButton> */}
         <EuiSpacer />
         {error.length > 0 && (
           <FormRow>

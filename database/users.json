@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "61ab94b6294efc1a14798427"
+  },
+  "Email": "admin@admin.hu",
+  "Name": "Admin",
+  "Role": "Admin",
+  "PasswordHash": {
+    "$binary": {
+      "base64": "wr0YwpDDngFjwprDmsKeOsKMVsOBwovCscKGw7LCrMKCw5BVw7HChCYHcEF/wrgvw6bCscO/NFQ0fxLDncKrw7PDkFTDmMO7FsOfwpvDrsK0wq3DjMK/w7J1XjBfPmvClMOhwrLDuw==",
+      "subType": "00"
+    }
+  },
+  "PasswordSalt": {
+    "$binary": {
+      "base64": "w7dew7cBw7HCiX0UwpcFfsKUwoFaE8OlSsOsYMKAwpwQFMKWwqhow65Aw6wVwovCrMKMwqcvw4XCgXdSw4cTw5FFOgLDoXPCkBzClVVLw7XCkX7Drz/CrW7CsRNTEcKIwp06w6HDjMOEw7rChxPDqMKQw77Djgd6Tj/DrEhUw4DDjMKrE1XCphvCtTDCkMKqDMOjwromwpM0w6w1bjzCgU0Mw5XDhsO/FXnDkwd2w6dmXMOUwoJ8QMKcwqtSw6Qvaw==",
+      "subType": "00"
+    }
+  },
+  "RefreshTokens": [
+    {
+      "Token": "MhaEMyRJ2gWR+8LuR/dk7KFqaBK7NSB2B1QZjiUeGnQ=",
+      "Expires": {
+        "$date": "2021-12-11T16:18:37.428Z"
+      }
+    }
+  ]
+}]

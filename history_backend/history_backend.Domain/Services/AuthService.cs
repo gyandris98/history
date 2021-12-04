@@ -23,22 +23,6 @@ namespace history_backend.Domain.Services
             this.config = config;
         }
 
-        public async Task<string> Authenticate(Login loginData)
-        {
-            var user = await userRepository.FindByEmail(loginData.Email);
-            if (user is null)
-            {
-                throw new ArgumentException("User with this email not found.");
-            }
-
-            if (!VerifyPassword(loginData.Password, user.PasswordHash, user.PasswordSalt))
-            {
-                throw new ArgumentException("Incorrect password.");
-            }
-
-            return GenerateJwtToken(user);
-        }
-
         public async Task<AuthenticateResponse> AuthenticateRefreshToken(Login loginData)
         {
             var user = await userRepository.FindByEmail(loginData.Email);
@@ -132,7 +116,6 @@ namespace history_backend.Domain.Services
                 Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()), new Claim(ClaimTypes.Name, user.Name), new Claim(ClaimTypes.Email, user.Email), new Claim(ClaimTypes.Role, user.Role) }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
-
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);

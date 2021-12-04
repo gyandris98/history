@@ -35,8 +35,8 @@ const AdminUsers: FunctionComponent<AdminUsersProps> = () => {
   const [pageSize, setPageSize] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
   const [deleteOpen, setDeleteOpen] = useState(false);
-  const query = useQuery(['users', { pageNumber, pageSize }], async params => {
-    const data = await usersAPI.fetchUsers({ pageNumber, pageSize, token: '' });
+  const query = useQuery(['users', { pageNumber, pageSize }], async _ => {
+    const data = await usersAPI.fetchUsers({ pageNumber, pageSize });
     setItems(data.users);
     setPageNumber(data.pageNumber);
     setTotalCount(data.totalCount);
@@ -56,7 +56,7 @@ const AdminUsers: FunctionComponent<AdminUsersProps> = () => {
   const onDelete = async () => {
     const ids = selectedItems.map(item => item.id);
     try {
-      const result = await usersAPI.deleteUsers(ids);
+      await usersAPI.deleteUsers(ids);
       setSelectedItems([]);
       setItems(items => items.filter(item => !ids.includes(item.id)));
       closeDeleteModal();
@@ -71,21 +71,12 @@ const AdminUsers: FunctionComponent<AdminUsersProps> = () => {
   const selection = {
     onSelectionChange: onSelectionChange,
     initialSelected: selectedItems,
-    selectable: user => true,
+    selectable: _ => true,
   };
 
   const onTableChange = async ({ page }) => {
     setPageNumber(page.index + 1);
     setPageSize(page.size);
-    // query.refetch();
-    // const res = await usersAPI.fetchUsers({
-    //   pageNumber: page.index + 1,
-    //   pageSize: page.size,
-    //   token,
-    // });
-    // setItems(res.users);
-    // setPageNumber(page.index + 1);
-    // setPageSize(page.size);
   };
 
   const onRoleSelectChange = async (e, item) => {

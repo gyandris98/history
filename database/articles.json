@@ -1,0 +1,837 @@
+[{
+  "_id": {
+    "$oid": "603e53718c446b812425375a"
+  },
+  "Title": "Ősi labdákat találtak egy sírban",
+  "Lead": "Eurázsia eddig ismert legrégebbi labdái 7–9 centiméter átmérőjűek, bőrből készültek szőrrel és gyapjúval töltve, minden bizonnyal egy lovas játék eszközei lehettek. Egy körülbelül 3000 éves sírban találták őket.\n",
+  "Body": {
+    "Time": 1638634362630,
+    "Blocks": [
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Nem jöttünk még rá pontosan, ki és mikor készítette az első labdát, a jelenleg ismert legkorábbi labda nagyjából 4500 éve készülhetett, és egy egyiptomi lelőhelyről került elő. Azt is tudjuk, hogy Közép-Amerikában legalább 3700 évvel ezelőtt már játszottak labdajátékokat külön erre a célra épült pályákon is, az egyiptomi vászonlabdák helyett itt gumiból készültek e sport- vagy játékszerek.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Eurázsiában viszont eddigi tudásunk szerint jóval később kezdtek labdajátékokat játszani, az ókori görögök valamikor 2500 évvel ezelőtt, Kína területéről pedig még ennél is 300 évvel későbbiek az első, erre utaló leletek. Most viszont már úgy tűnik, hogy jóval korábban is labdáztak az emberek Eurázsiában.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "header",
+        "Data": {
+          "Text": "A legrégebbi labda",
+          "Level": 2,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Kínai ábrázolások alapján azt eddig is tudni lehetett, hogy a Kína északi és keleti határvidékén élő lovas népek játszottak egyfajta, a mai lovaspólóhoz hasonlatos, a labdát lovon ülve, ütőkkel irányító játékot, amelyet aztán a kínaiak is átvehettek. Ezért amikor a ma a hírekben egészen más okokból szereplő ujgurok lakta kínai vidék egyik városa, Turpan közelében található, úgynevezett Yanghai sírok egyikéből a 2000-es évek elején három, 7–9 centiméter átmérőjű, szőrrel és gyapjúval töltött bőrlabda került elő, a felfedezés önmagában nem volt meglepő.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Az ezen az összefoglaló néven emlegetett, közel háromezer temetkezési hely mintegy másfél évezredet fog át, és a régészek sokáig azt feltételezték, a labdajátékok terjedésének korábbi időrendjébe illeszkedő lelettel állnak szemben. Idén azonban új módszerekkel sikerült pontosabban megállapítani a labdák korát, és az derült ki, hogy",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "valamikor a 2900 és 3200 évvel ezelőtti korban készültek, ezzel pedig ezek a legrégibb, Eurázsia területén eddig feltárt labdák.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "A sír egyébként egy negyvenéves kor körüli férfié volt, a labdák mellett egy díszes, a lovaglás miatt az ágyék körül kipárnázott és megerősített nadrág, valamint egy pár vörös bőrcsizma is előkerült belőle, feltehetően tehát a területen akkor élő lovas nép egyik tehetősebb képviselőjének szolgált végső nyughelyül.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "header",
+        "Data": {
+          "Text": "Akár a magyarok is?",
+          "Level": 2,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Az itteniek valószínűleg elsőként vagy az elsők között háziasították a lovakat ezen a vidéken, és minden jel arra mutat, hogy a labdákat a kínai ábrázolásokon látott sporthoz használták. Ugyan a visszafogott svájci kutatók szerint „nincs egyértelmű bizonyíték arra, hogy a labdákkal játszottak-e, és ha igen, milyen játékot”, az eredményeket kommentáló egy másik történész szerint egyértelmű, hogy sportszerek voltak. Az egyik labda pontosan úgy van kiszakadva, ahogy egy faütő nagy erejű csapása szétszakítaná az anyagot, a labdákon pedig piros keresztek láthatók felfestve, amelyek minden bizonnyal azt a célt szolgálták, hogy a lovak által felvert porban is jobban láthatók legyenek a játékosok számára.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Ettől függetlenül sajnos a játék menetét, szabályait nem ismerjük, de a későbbi példák alapján feltételezhetjük, hogy egyszerre szolgálta a szórakozást, illetve a lovasok taktikai és technikai tudásának harctéren is hasznosítható fejlesztését, valamint bizonyára társadalmi és ceremoniális jelentősége is lehetett.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Bár e felfedezést egyelőre semmilyen bizonyíték nem köti össze a magyarság korai történetével, azért azzal a gondolattal eljátszhatunk, hogy a közép-ázsiai lovas népekhez sok szállal kötődő korai magyarok talán maguk is űztek hasonló sportot, így a lovak mellett a labdajátékoknak is lehet évezredes hagyománya a magyar kultúrában.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      }
+    ],
+    "Version": "2.19.1"
+  },
+  "User": {
+    "_id": "6031322afd0b3887d6161f4d",
+    "Name": "Val Aki",
+    "Email": "valaki@hello.hu"
+  },
+  "Author": "",
+  "CreatedAt": {
+    "$date": "2021-03-02T15:02:09.369Z"
+  },
+  "Cover": {
+    "_id": "canfidhsi6qdmddpszsl",
+    "CreatedAt": {
+      "$date": "2021-03-22T08:25:44Z"
+    },
+    "Url": "https://res.cloudinary.com/dkilmxtlk/image/upload/v1616401544/canfidhsi6qdmddpszsl.jpg",
+    "Width": 1024,
+    "Height": 576,
+    "Bytes": 110101
+  },
+  "Slug": "osi-labdakat-talaltak-egy-sirban",
+  "Schedule": {
+    "$date": "2021-03-02T15:02:09.369Z"
+  },
+  "Tags": [
+    "labda",
+    "sport",
+    "sír"
+  ]
+},{
+  "_id": {
+    "$oid": "6058548ca70d582f6c985b58"
+  },
+  "Title": "Ez az első kutya, amit névről ismerünk",
+  "Lead": "Az emberek évezredek óta tartanak háziállatokat, egy 12 ezer évesre datált észak-izraeli sírban például egy kiskutya maradványaira bukkantak egy emberi csontváz karjaiban.",
+  "Body": {
+    "Time": 1638634343020,
+    "Blocks": [
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Ez lenne a világ első ismert házikedvence? Sajnos ezt nem tudjuk egyértelműen eldönteni, hiszen egy őskori temetkezés maradványaiból nehéz bármiféle szoros érzelmi kötelékre következtetni, márpedig egy házikedvenchez ilyesmit is társítunk.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Ha az elnevezést az érzelmi kapcsolat jelének tartjuk, akkor már pontosabbak lehetünk. A legrégebbi névvel ismert házikedvencnek egy egyiptomi palotakutyát tarthatunk, Abuwityuw-t, avagy Abutiút. Az állatot egy gyászoló fáraó temettette el egy VI. dinasztia kori sírba, valamikor Kr.e. 2280 körül. A sírban található felirat elmondása szerint",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "„Őfelsége úgy parancsolta, hogy őt ünnepélyesen temessék el, számára a királyi kincstárból adjanak koporsót, szép vásznat nagy mennyiségben, és tömjént. Őfelsége adott ezen kívül illatos balzsamot, és elrendelte, hogy az építőmesterek építsenek neki sírt. Őfelsége azért tette ezt, hogy őt a nagy isten, Anubis fogadja kegyeibe.”",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Sok római gazdi is hasonlóan érzelmesen búcsúzott kedvencétől, egy Kr.e. II. századi, Helena nevű kutyát például egyenesen „mostohagyermek”-ként emlegetett a sírfelirata. A római „véleményformáló” szerzők azonban általában helytelenítették a háziállatok ajnározását, és a házikedvencek tartását számos korban nézték rossz szemmel. Talán csak a viktoriánus korban jött létre a házikedvencek tartásának a maihoz hasonlatos, széles körben elfogadott kultúrája.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      }
+    ],
+    "Version": "2.19.1"
+  },
+  "User": {
+    "_id": "602bcbd17545028a44b147ae",
+    "Name": "Győrffy András",
+    "Email": "gy.andris98@gmail.com"
+  },
+  "Author": "",
+  "CreatedAt": {
+    "$date": "2021-03-22T08:25:48.004Z"
+  },
+  "Cover": {
+    "_id": "canfidhsi6qdmddpszsl",
+    "CreatedAt": {
+      "$date": "2021-03-22T08:25:44Z"
+    },
+    "Url": "https://res.cloudinary.com/dkilmxtlk/image/upload/v1616401544/canfidhsi6qdmddpszsl.jpg",
+    "Width": 1024,
+    "Height": 576,
+    "Bytes": 110101
+  },
+  "Slug": "ez-az-elso-kutya-amit-nevrol-ismerunk",
+  "Schedule": {
+    "$date": "2021-03-22T08:25:48.004Z"
+  },
+  "Tags": [
+    "kutya",
+    "izrael",
+    "sír"
+  ]
+},{
+  "_id": {
+    "$oid": "6058563fa70d582f6c985b59"
+  },
+  "Title": "Hogyan szültek a középkorban?",
+  "Lead": "A középkori Európában a szülés súlyos kihívást és veszélyt jelentett. A BBC History összeszedte, milyen „tippeket” fogadhattak meg azok a nők, akik a középkorban voltak várandósok.",
+  "Body": {
+    "Time": 1621092049491,
+    "Blocks": [
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "A középkori Európában a szülés súlyos kihívást és veszélyt jelentett. A BBC History összeszedte, milyen „tippeket” fogadhattak meg azok a nők, akik a középkorban voltak várandósok.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "A középkorban a szülés közösségi esemény volt. A családtagok, a plébános és a helyi szakemberek mind segítséget nyújtottak – és amikor bábákat is odahívtak, azok gyakran csapatban dolgoztak. Egy XII. század végi angol leírás megemlíti, hogy a middletoni Eliza szülésénél hét bába volt jelen. Egy ilyen nagy csapat képes volt összeadni tudását, és megosztani a szülés segítésénél elvégzendő feladatokat.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "E nők szolgálatait mindenféle helyzetekben igénybe vehették. 1259-ben Saint-Saëns francia faluban két helybeli bába segédkezett egy apáca,&nbsp;Roueni Nicola&nbsp;szülésénél, amely a zárdában zajlott le. Nicola gyermekét valószínűleg a kolostorban szolgáló egyik pap keresztelte meg, bár erre a bábáknak is volt felhatalmazásuk, ha a gyermek lelke veszélyben forgott.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "A bábáktól elvárták, hogy erkölcsi döntőbírók is legyenek, akik felkutatják a törvénytelen születéseket (nem kétséges, hogy Nicola kisbabája is közéjük tartozott) és a gyermekgyilkosságokat. Eközben saját magatartásuk is vizsgálat tárgyát képezte. 1481-ben&nbsp;Agnes Marshall&nbsp;angol szülésznőt azzal vádolták, hogy varázslás jellegű ráolvasásokat alkalmaz. A rosszul fizetett és olykor boszorkánysággal gyanúsított angol szülésznőknek kevesebb pozitív tapasztalatuk volt, mint a szakmai képzésben részesülő és a városi vezetés által hivatalosan alkalmazott francia és német kolléganőiknek, még akkor is, ha sokkal kevesebbet kerestek, mint a férfi szülészek.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Orvosok, illetve sebészek csak ritkán segítettek a szülésben, bár arisztokrata hölgyek szüléséhez gyakran hívták oda a család orvosát.&nbsp;Anjou Blankára,&nbsp;II. Jakab&nbsp;aragóniai király második feleségére mind a 10 szülésekor orvosok vigyáztak. Ennek ellenére 1310-ben, utolsó kislánya születése után nem sokkal meghalt.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "header",
+        "Data": {
+          "Text": "A kórház legyen az utolsó mentsvár!",
+          "Level": 2,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "A legtöbb középkori nő nem orvosi, hanem otthoni környezetben esett át a szülésen. Ez pedig – ha az arisztokráciához vagy a kereskedői réteghez tartoztak – gyakran azt jelentette, hogy már egy hónappal a szülés várható ideje előtt visszavonultak a szülőszobába, egy elsötétített, puha bútorokkal berendezett helyiségbe. A szülőszoba ugyan szigorúan női felségterület volt, amelyet barátnők, nőrokonok és bábák felügyeltek, de a férfiakat is súlyosan érintette a szülés, különösen azért, mert a családi vérvonal folytatása volt a tét. Amikor a norfolki&nbsp;Margaret Paston&nbsp;1441-ben terhes lett, megkérte a férjét, hogy",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "viselje az általa küldött, védő hatású gyűrűt, hogy ily módon legyen részese biztonságos terhességének és szülésének.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "A mai szokásokkal éles ellentétben, a kórház csak az utolsó választás volt a szülő nő számára. A középkori kórházak a beteg szegényeknek fenntartott jótékonysági intézmények voltak, ennek megfelelően egyes nők bizonytalan otthoni körülményeik miatt kerültek a kórházi szülészeti kórtermekbe. A leányanyáknak különösen nagy szükségük volt a kórházi ellátásra. Ők ingatag társadalmi helyzetük miatt gyakran elhagyták gyermeküket, akiket így szoptatós dajkáknak kellett táplálniuk a lelencházakban. Az egyik ilyen intézmény, a firenzei Santa Maria della Scala falában volt egy elfordítható doboz, ahova a csecsemőket névtelenül be lehetett tenni (a dobozt aztán befordították, és a babát a kórházban kivették belőle).",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "image",
+        "Data": {
+          "Text": null,
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": {
+            "Url": "https://res.cloudinary.com/dkilmxtlk/image/upload/v1616401081/elr0szv4pkatxnqy5ycu.jpg"
+          },
+          "Caption": "LEEMAGE VIA AFP",
+          "WithBorder": false,
+          "Stretched": false,
+          "WithBackground": false
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Az intézményben szoptatós dajkáknak is fenntartottak ágyakat, és a csecsemőket egy vidéki szoptatós dajkákból szervezett hálózatba juttatták el. A szülészeti kórtermekben fekvők így is hozzájutottak a bábák szakértelméhez. Ezek a szülésznők pályafutásuk végére nagy tapasztalatra tehettek szert nem csupán a gyermekszülés, de az általuk segített szegényebb nőket érintő szociális nehézségek kezelése terén is.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "header",
+        "Data": {
+          "Text": "Kérd az égiek segítségét!",
+          "Level": 2,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Míg a terhességgel kapcsolatos hivatalos orvosi útmutatáshoz nehéz volt hozzájutni, az isteni segítséghez (vagy legalábbis annak ígéretéhez) egy cseppet sem. Középkori elődeink úgy hitték, hogy a biztonságos terhességet és szülést több szent is támogatja. Valószínűleg nem meglepő, hogy e szentek többsége nő volt, közülük is a két legkiemelkedőbb&nbsp;Szűz Mária&nbsp;és&nbsp;Szent Margit. A késő középkori Angliában azonban egy kevésbé ismert szentet,&nbsp;Julittát&nbsp;is széles körben tisztelték, fiával,&nbsp;Quiricusszal&nbsp;együtt. Julitta és Quiricus együtt halt mártírhalált – az anya és gyermeke közötti kapcsolat szentségét szimbolizálva. Ez a szent pár – Szűz Mária és más szentek alakjával együtt – terhességi öveken is szerepel.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "E hosszú pergamentekercseknek érintkezésbe kellett kerülniük az anya testével, akár úgy, hogy körültekerték a hasán, akár úgy, hogy feltekerve hordta magánál. Ezek az övek az ereklyékhez hasonlítottak, mivel úgy gondolták, hogy a szentekhez kapcsolódó tárgyakat jótékony erők hatják át. Mágikus jellegzetességeik a gyógyító szövegek és varázsigék voltak.&nbsp;VII. Henrik&nbsp;angol király felesége,&nbsp;Yorki Erzsébet&nbsp;hetedik vagy nyolcadik gyermekének születése előtt fizetett egy szerzetesnek, hogy hozzon neki egy Szűz Mária-övet. A királyné a Hampton Court-i kolostorba is elment, nyilván azért, hogy további isteni védelmet kapjon. Szomorú, hogy 1503 februárjában, a szülés után meghalt, és az újszülött kislánya is.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Az öveket és más kegytárgyakat – például szenteket ábrázoló szobrocskákat – a kevésbé tehetős nők is ugyanúgy használták, mint az elit tagjai, sőt a szüléssel kapcsolatos, de vallási tartalommal nem rendelkező tárgyaknak is értéket tulajdonítottak. A XII. században&nbsp;Angliai Matild&nbsp;német-római császárné,&nbsp;I. Henrik&nbsp;angol király lánya – egy nehéz szülés után, amelyet újszülött fiával együtt túlélt – a selyemmatracot, amelyen vajúdás közben feküdt, hálából adományként felajánlotta a leprások javára. Ez a matrac így már nem csupán egy királyi személyhez köthető luxuscikk volt, hanem a megnyugváshoz, a biztatáshoz és a gyógyuláshoz is köze lett.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "header",
+        "Data": {
+          "Text": "Örvendezz, de ne engedd el magad!",
+          "Level": 2,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "A statisztikák zord képet festenek arról, milyen volt a szülés és a csecsemőkor a középkori Európában. Az 1420-as évekbeli Firenzében elhalálozott férjes asszonyoknak mintegy az ötöde szülésben halt meg, az észak-yorkshire-i elhagyott középkori faluból, Wharram Percyből származó régészeti leletek pedig arra utalnak, hogy a gyermekek 19 százaléka kétéves kora előtt meghalt. E szörnyű mortalitásnak nem egyetlen oka volt, de az egyik legfőbb bűnösnek a fertőzést tekinthetjük.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Az anyák megfertőződését főként a testben maradt méhlepény okozta.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Egy,&nbsp;Becket Tamásról&nbsp;az 1170-es években feljegyzett csodálatos történet szerint a feltoni&nbsp;Herbert&nbsp;felesége nagyon megszenvedte, hogy szülés után a méhlepénynek csak egy része távozott a testéből, ezért a szent segítségére volt szüksége a bent rekedt anyag okozta fájdalom és légzési problémák enyhítésére.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "A sebezhető újszülöttet olyan tárgyakkal – például korall és borostyán amulettekkel – látták el, amelyeknek védelmező erőt tulajdonítottak. Az anya 4–6 hétig, a gyermekágy idejére a szülőszobában maradt, így nem térhetett vissza a közösségbe, viszont pihenhetett és visszanyerhette erejét. Ez egyfajta tisztulási folyamat része volt, amely azt a hiedelmet tükrözte, hogy az anya teste a szüléstől tisztátalanná válik, ahogy a nőket a menstruáció idején is annak tekintették. A hosszú elzártság után az anyát rituálisan visszafogadták a plébániatemplomba.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "A templom előcsarnokában találkozott a pappal, aki meghintette szenteltvízzel, ezután az asszony felajánlást tett, és misét tartottak a tiszteletére. Ezt a rituálét „churchingnek” hívták. Bár e rituálé korlátozta az anya mozgásszabadságát, lehetőséget adott a lakomákra és az ünneplésre is – a szülőszobában és az egyházközségben egyaránt. Ez a vallási szokás annyira beleszövődött a középkori életbe, hogy Észak-Európában a nők a reformáció idején ellenezték a megszüntetésére irányuló törekvéseket. A „churching” valószínűleg alátámasztotta a nőkről kialakult negatív sztereotípiákat, ugyanakkor anyai identitásukat is megerősítette, ezt pedig nyilvánvalóan értékelték.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      }
+    ],
+    "Version": "2.19.1"
+  },
+  "User": {
+    "_id": "602bcbd17545028a44b147ae",
+    "Name": "Győrffy András",
+    "Email": "gy.andris98@gmail.com"
+  },
+  "Author": "",
+  "CreatedAt": {
+    "$date": "2021-03-22T08:33:03.663Z"
+  },
+  "Cover": {
+    "_id": "hgulw6b5gasygwabvvpd",
+    "CreatedAt": {
+      "$date": "2021-05-15T15:22:41Z"
+    },
+    "Url": "https://res.cloudinary.com/dkilmxtlk/image/upload/v1621092161/hgulw6b5gasygwabvvpd.jpg",
+    "Width": 1024,
+    "Height": 576,
+    "Bytes": 221146
+  },
+  "Slug": "hogyan-szultek-a-kozepkorban",
+  "Schedule": {
+    "$date": "2021-03-22T08:00:00Z"
+  },
+  "Tags": [
+    "középkor",
+    "nők",
+    "szülés"
+  ]
+},{
+  "_id": {
+    "$oid": "6076b9b4fd712fb3e890343f"
+  },
+  "Title": "Így vette át Bethlen a kormányrudat",
+  "Lead": "Az utolsó magyar király, IV. Károly első visszatérési kísérlete alaposan felkavarta a lassan konszolidálódó magyar belpolitika vizeit. A kritikus napokban mutatott határozatlansága, illetve kétértelmű magatartása miatt az addigi miniszterelnök, gróf Teleki Pál pozíciója megrendült. Nemcsak a szabadkirályválasztók heterogén táborának a bizalmát vesztette el, hanem Horthyét is. Április 13-án ezért benyújtotta lemondását, amit a kormányzó elfogadott, s még ugyanezen a napon gróf Bethlen Istvánt kérte fel kormányalakításra.",
+  "Body": {
+    "Time": 1631082235206,
+    "Blocks": [
+      {
+        "Type": "header",
+        "Data": {
+          "Text": "Tekintélyes, ismert politikus",
+          "Level": 2,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "A 46 éves politikus nevét ekkor már itthon és külföldön egyaránt jól ismerték. Bár a háború végéig főleg szűkebb hazájának, Erdélynek az ügyeivel foglalkozott, 1918–1919-ben az országos politika élvonalába került. 1919 februárjától a demokratikus átalakulás ellentáborának egyik vezéralakja volt, a Tanácsköztársaság alatt pedig Bécsből irányította az ellenforradalmat. 1920 első felében a békedelegáció egyik főmegbízottjaként Párizsban tartózkodott, s kulcsszerepet vállalt az új rendszer külpolitikai útkeresésében.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Tekintélyére és elfogadottságára jellemző, hogy néhány órával a felkérése után kész kabinetlistával jelentkezett Horthynál, aki minden személyi javaslatát elfogadta, s már április 14-én kinevezte az új kormányt.&nbsp;",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Bár az évek folyamán kormánya többször átalakult, maga Bethlen 1931. augusztus 24-ig töltötte be a miniszterelnöki posztot. A felmerülő problémák és a megoldandó feladatok jellege alapján tízéves kormányfősége négy egymást követő szakaszra osztható. Az első időszakot (1921–1923) a belpolitikai stabilitás megteremtése; a másodikat (1923–1925) az ország pénzügyi helyzetének a szanálása és a gazdaság dinamizálása; a harmadikat (1927–1929) egy modern szociálpolitika alapjainak a lerakása, a külpolitikai elszigeteltségből való kitörés és a revízióra való felkészülés; a negyediket (1929–1931) a nemzetközi gazdasági válság negatív hazai hatásainak a minimalizálására való törekvés jellemezte.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "image",
+        "Data": {
+          "Text": null,
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": {
+            "Url": "https://res.cloudinary.com/dkilmxtlk/image/upload/v1618393305/cwqlenhz8smdg2qyvmhr.jpg"
+          },
+          "Caption": "WIKIPEDIA: Az alakuló Bethlen-kormány&nbsp;az eskütétel után",
+          "WithBorder": false,
+          "Stretched": false,
+          "WithBackground": false
+        }
+      },
+      {
+        "Type": "header",
+        "Data": {
+          "Text": "Kétfrontos harc",
+          "Level": 2,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Nagybirtokos-arisztokrata származásából, neveltetéséből és ifjúkorában kialakult politikai meggyőződéséből következett, hogy Bethlen olyan liberális és autokrata jegyeket is felmutató konzervatív politika érvényesítésére törekedett, amely szinte folyamatosan „kétfrontos” harcot követelt meg tőle. Fő céljai közé tartozott a demokratikus tábor megosztása, meggyengítése és érdekérvényesítési lehetőségeik korlátok között tartása. Ennek érdekében került sor 1922 márciusában az 1919 őszén bevezetett általános és titkos választójog korlátozására és nagyrészt nyílttá tételére, amely állandó parlamenti többséget biztosított a kormánypártnak. Ugyanakkor eredményesen törekedett a szélsőjobboldal visszaszorítására is. Ennek csúcspontja a&nbsp;Gömbös Gyula&nbsp;vezette fajvédők ellenzékbe kényszerítése volt 1923 nyarán.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Eszményképe a parlamentarizmus olyan korlátozott formája volt, amely, ha nem is annyira, mint a XIX. században, de továbbra is biztosította a történelmi elit – a nagybirtokos arisztokrácia és a középbirtokos nemesség, valamint a művelt és vagyonos középosztály – meghatározó befolyását az ország ügyeinek intézésére. A választójog korlátozása mellett ezt a célt szolgálta a népképviseleti elvet ignoráló felsőház megszervezése és felállítása is 1926-ban. A XIX. századi liberalizmust elfogadta, sőt „hatalmas alkotótényezőnek” nevezte. A minden korlátozás nélküli többségi elvet, vagyis a tömegdemokráciákat azonban a liberalizmus „fattyúhajtásának” minősítette, és azokat a „rombolással” azonosította.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "header",
+        "Data": {
+          "Text": "A válságba bukott bele",
+          "Level": 2,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Tízéves miniszterelnöksége alatt Bethlen mindvégig éberen őrködött azon, hogy a hatalom töretlenül a történelmi elit kezében maradjon. Tudatában volt azonban annak is, hogy pusztán politikai és adminisztratív eszközökkel ez nem biztosítható. Ezért arra törekedett, hogy a politikai hatalomból részben vagy egészben kizárt középső és alsó rétegeket egy átgondolt szociálpolitikával a rendszer bázisává tegye vagy legalábbis semlegesítse őket.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "E szociálpolitika legfontosabb elemei a következők voltak: mérsékelt földreform, falusi kislakás-építési akció, a betegség- és balesetbiztosítás korszerűsítése, a nyugdíj intézményének kiterjesztése és a népiskolai hálózat bővítése.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      },
+      {
+        "Type": "paragraph",
+        "Data": {
+          "Text": "Az 1920-as évek második felére ezek az intézkedések Bethlent népszerűvé tették. Gyorsan megfordult azonban az ország hangulata a válság éveiben, amikor a nemzeti jövedelem csökkenni kezdett, és az állami szociálpolitika addigi forrásai eldugultak. Az új helyzetben a társadalom minden régi ellentéte kiújult, a kormányfővel szembeni elégedetlenség nőtt, s ez Bethlent lemondásra, visszavonulásra késztette.",
+          "Level": null,
+          "Style": null,
+          "Items": null,
+          "File": null,
+          "Caption": null,
+          "WithBorder": null,
+          "Stretched": null,
+          "WithBackground": null
+        }
+      }
+    ],
+    "Version": "2.19.1"
+  },
+  "User": {
+    "_id": "602bcbd17545028a44b147ae",
+    "Name": "Győrffy András",
+    "Email": "gy.andris98@gmail.com"
+  },
+  "Author": "",
+  "CreatedAt": {
+    "$date": "2021-04-14T09:45:24.108Z"
+  },
+  "Cover": {
+    "_id": "xtf7mcr7rvguc64ztcq3",
+    "CreatedAt": {
+      "$date": "2021-04-14T09:44:18Z"
+    },
+    "Url": "https://res.cloudinary.com/dkilmxtlk/image/upload/v1618393458/xtf7mcr7rvguc64ztcq3.jpg",
+    "Width": 779,
+    "Height": 438,
+    "Bytes": 273178
+  },
+  "Slug": "igy-vette-at-bethlen-a-kormanyrudat",
+  "Schedule": {
+    "$date": "2021-04-14T09:45:24.108Z"
+  },
+  "Tags": [
+    "Horthy-kor",
+    "kormány",
+    "Bethlen István"
+  ]
+}]
